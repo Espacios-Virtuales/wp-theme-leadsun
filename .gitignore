@@ -1,0 +1,19 @@
+# Local dependencies
+node_modules/
+
+# Generated maps / local build noise
+assets/css/*.map
+*.log
+.DS_Store
+
+# Local environment / IDE
+.env
+.env.*
+.idea/
+.vscode/
+
+# WordPress runtime files must never be committed here
+wp-config.php
+
+# Bootstrap is installed through npm; do not vendor its source into assets/scss.
+assets/scss/bootstrap/

@@ -1,0 +1,26 @@
+// LEADSUN main stylesheet.
+// Bootstrap is installed locally through npm; its source is not vendored in this repository.
+
+@import "settings/tokens";
+@import "settings/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+@import "base/root";
+@import "base/typography";
+@import "base/media";
+
+@import "layout/header";
+@import "layout/navigation";
+@import "layout/footer";
+@import "layout/grid";
+
+@import "components/buttons";
+@import "components/cards";
+@import "components/video";
+
+@import "pages/home";
+@import "pages/products";
+@import "pages/projects";
+
+@import "utilities/accessibility";
+@import "utilities/helpers";

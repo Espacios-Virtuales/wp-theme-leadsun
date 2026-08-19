@@ -1,0 +1,12 @@
+.site-header {
+  position: relative;
+  z-index: 20;
+}
+
+.leadsun-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.5rem;
+}

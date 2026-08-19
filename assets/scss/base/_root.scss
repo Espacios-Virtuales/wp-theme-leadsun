@@ -1,0 +1,12 @@
+:root {
+  --leadsun-content-max-width: #{$leadsun-content-max-width};
+  --leadsun-transition: #{$leadsun-transition};
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+}

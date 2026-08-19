@@ -1,0 +1,11 @@
+// Bootstrap overrides belong here and must be declared before importing Bootstrap.
+$font-family-sans-serif: $leadsun-font-family-base;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: $leadsun-content-max-width
+);
+
+// Brand colors are intentionally not fixed in the foundation task.
