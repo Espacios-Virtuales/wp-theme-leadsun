@@ -1,3 +1,36 @@
 body {
   font-family: $leadsun-font-family-base;
+  font-size: clamp(1rem, 0.98rem + 0.1vw, 1.125rem);
+  line-height: 1.65;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.65em;
+  color: var(--ls-white);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.75rem); }
+h3 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); }
+h4 { font-size: clamp(1.25rem, 2vw, 1.625rem); }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p { max-width: 70ch; margin-bottom: 1.25rem; }
+
+a {
+  text-decoration-color: rgba(226, 27, 35, 0.6);
+  text-underline-offset: 0.18em;
+  transition: color var(--ls-transition), text-decoration-color var(--ls-transition);
+}
+
+a:hover { color: var(--ls-white); text-decoration-color: var(--ls-red); }
+
+small, .leadsun-meta { color: var(--ls-text-muted); font-size: 0.8rem; letter-spacing: 0.04em; }
+
+label { color: var(--ls-text); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+
+button, .btn { letter-spacing: 0.04em; text-transform: uppercase; }

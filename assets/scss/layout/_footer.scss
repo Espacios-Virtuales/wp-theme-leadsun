@@ -1,7 +1,12 @@
 .site-footer {
   margin-top: 4rem;
-  padding-block: 2rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--ls-border);
+  background: var(--ls-black);
 }
+
+.site-footer a { color: var(--ls-text-muted); text-decoration: none; }
+.site-footer a:hover { color: var(--ls-white); }
 
 .leadsun-footer__inner {
   display: grid;

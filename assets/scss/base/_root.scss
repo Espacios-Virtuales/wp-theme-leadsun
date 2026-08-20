@@ -9,4 +9,50 @@ html {
 
 body {
   min-height: 100vh;
+  background: var(--ls-bg);
+  color: var(--ls-text);
+}
+
+::selection {
+  background: var(--ls-red);
+  color: var(--ls-white);
+}
+
+.site {
+  min-height: 100vh;
+  overflow: clip;
+}
+
+.site-main {
+  min-width: 0;
+}
+
+.leadsun-container {
+  width: min(100% - 3rem, var(--ls-content-max-width));
+  margin-inline: auto;
+}
+
+.leadsun-section {
+  padding-block: var(--ls-section-space);
+}
+
+.leadsun-section--surface {
+  background: var(--ls-surface);
+}
+
+.leadsun-section__header {
+  display: grid;
+  gap: 1rem;
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.leadsun-eyebrow {
+  margin: 0;
+  color: var(--ls-red);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }

@@ -1,5 +1,22 @@
 // Bootstrap overrides belong here and must be declared before importing Bootstrap.
 $font-family-sans-serif: $leadsun-font-family-base;
+$primary: #e21b23;
+$secondary: #aab2ba;
+$body-bg: #070a0d;
+$body-color: #f4f6f8;
+$border-color: rgba(255, 255, 255, 0.14);
+$border-radius: $leadsun-radius-md;
+$border-radius-sm: $leadsun-radius-sm;
+$border-radius-lg: $leadsun-radius-lg;
+$container-padding-x: 1.5rem;
+$grid-gutter-width: 1.5rem;
+$headings-font-weight: 700;
+$headings-line-height: 1.05;
+$link-color: $body-color;
+$link-hover-color: #ffffff;
+$focus-ring-color: rgba($primary, 0.45);
+$btn-font-weight: 700;
+$btn-border-radius: $leadsun-radius-sm;
 $container-max-widths: (
   sm: 540px,
   md: 720px,

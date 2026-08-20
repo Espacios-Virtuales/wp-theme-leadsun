@@ -1,8 +1,36 @@
 .leadsun-card {
+  display: flex;
+  min-height: 100%;
   min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ls-border);
+  border-radius: var(--ls-radius-md);
+  background: var(--ls-surface);
+  box-shadow: var(--ls-shadow-sm);
+  transition: border-color var(--ls-transition), transform var(--ls-transition);
 }
 
+.leadsun-card:hover,
+.leadsun-card:focus-within { border-color: var(--ls-border-strong); transform: translateY(-3px); }
+
 .leadsun-card__link {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   color: inherit;
   text-decoration: none;
 }
+
+.leadsun-card__media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--ls-black); }
+
+.leadsun-card__media img,
+.leadsun-card__media video { width: 100%; height: 100%; object-fit: cover; transition: transform 360ms ease; }
+
+.leadsun-card:hover .leadsun-card__media img,
+.leadsun-card:hover .leadsun-card__media video { transform: scale(1.025); }
+
+.leadsun-card__body { display: grid; gap: 0.75rem; padding: 1.25rem; }
+.leadsun-card__title { margin: 0; font-size: clamp(1.25rem, 2vw, 1.5rem); }
+.leadsun-card__meta,
+.leadsun-card__action { color: var(--ls-text-muted); }
+.leadsun-card__action { margin-top: auto; color: var(--ls-red); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
