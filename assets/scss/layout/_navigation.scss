@@ -1,27 +1,10 @@
-.menu-toggle {
-  display: inline-flex;
-}
-
 .main-navigation ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.main-navigation:not(.is-open) {
-  display: none;
-}
-
 @media (min-width: 992px) {
-  .menu-toggle {
-    display: none;
-  }
-
-  .main-navigation,
-  .main-navigation:not(.is-open) {
-    display: block;
-  }
-
   .main-navigation > div > ul,
   .main-navigation > ul {
     display: flex;
