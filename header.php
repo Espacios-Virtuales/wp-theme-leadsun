@@ -17,23 +17,24 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Saltar al contenido', 'leadsun' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="container leadsun-header__inner">
+		<div class="container leadsun-header__inner navbar navbar-expand-lg">
 			<div class="site-branding">
 				<?php the_custom_logo(); ?>
 			</div>
 
-			<button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-				<span class="menu-toggle__label"><?php esc_html_e( 'Menú', 'leadsun' ); ?></span>
+			<button class="navbar-toggler menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="<?php esc_attr_e( 'Alternar navegación principal', 'leadsun' ); ?>">
+				<span class="navbar-toggler-icon" aria-hidden="true"></span>
 			</button>
 
-			<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Navegación principal', 'leadsun' ); ?>">
+			<nav id="site-navigation" class="main-navigation collapse navbar-collapse" aria-label="<?php esc_attr_e( 'Navegación principal', 'leadsun' ); ?>">
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location' => 'primary',
 						'menu_id'        => 'primary-menu',
+						'menu_class'     => 'navbar-nav ms-auto',
 						'container'      => false,
-						'fallback_cb'    => false,
+						'fallback_cb'    => 'wp_page_menu',
 					)
 				);
 				?>
