@@ -1,0 +1,42 @@
+{
+    "key": "group_leadsun_solution",
+    "title": "LEADSUN · Solución",
+    "fields": [
+        {
+            "key": "field_leadsun_solution_secondary_image",
+            "label": "Imagen secundaria",
+            "name": "solution_secondary_image",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_leadsun_solution_youtube_url",
+            "label": "URL de YouTube",
+            "name": "solution_youtube_url",
+            "type": "url",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_solution_datasheet",
+            "label": "Ficha técnica",
+            "name": "solution_datasheet",
+            "type": "file",
+            "required": 0,
+            "return_format": "id",
+            "library": "all",
+            "mime_types": "pdf"
+        }
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "leadsun_solution"}]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1787337600
+}
