@@ -8,6 +8,9 @@
  */
 
 get_header();
+
+$style_guide_video = leadsun_youtube_video( 'https://www.youtube.com/watch?v=M7lc1UVf-VE' );
+$style_guide_modal = leadsun_video_modal_id();
 ?>
 <main id="primary" class="site-main">
 	<section class="leadsun-section">
@@ -33,6 +36,36 @@ get_header();
 					</div>
 				</article>
 			</div>
+		</div>
+	</section>
+
+	<section class="leadsun-section" id="video">
+		<div class="leadsun-container">
+			<div class="leadsun-section__header">
+				<p class="leadsun-eyebrow"><?php esc_html_e( 'Multimedia foundation', 'leadsun' ); ?></p>
+				<h2><?php esc_html_e( 'Modal de video reutilizable', 'leadsun' ); ?></h2>
+				<p><?php esc_html_e( 'Prueba técnica local: el reproductor sólo se carga al abrir el modal.', 'leadsun' ); ?></p>
+			</div>
+			<?php
+			get_template_part(
+				'template-parts/components/video-trigger',
+				null,
+				array(
+					'video'      => $style_guide_video,
+					'modal_id'   => $style_guide_modal,
+					'poster_url' => leadsun_media_fallback_url(),
+					'title'      => __( 'Reproducir video de demostración', 'leadsun' ),
+				)
+			);
+			get_template_part(
+				'template-parts/components/video-modal',
+				null,
+				array(
+					'modal_id' => $style_guide_modal,
+					'title'    => __( 'Video de demostración', 'leadsun' ),
+				)
+			);
+			?>
 		</div>
 	</section>
 
