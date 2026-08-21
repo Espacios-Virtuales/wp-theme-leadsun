@@ -39,5 +39,6 @@
 				);
 				?>
 			</nav>
+			<a class="btn-leadsun leadsun-header__cta" href="<?php echo esc_url( home_url( '/#contacto' ) ); ?>"><?php esc_html_e( 'Cotizar proyecto', 'leadsun' ); ?></a>
 		</div>
 	</header>

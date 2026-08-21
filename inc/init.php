@@ -19,3 +19,4 @@ require_once __DIR__ . '/domain/taxonomies.php';
 require_once __DIR__ . '/domain/relations.php';
 require_once __DIR__ . '/media/youtube.php';
 require_once __DIR__ . '/presentation/entities.php';
+require_once __DIR__ . '/presentation/home.php';

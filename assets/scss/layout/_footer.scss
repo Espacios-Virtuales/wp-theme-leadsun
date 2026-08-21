@@ -10,5 +10,12 @@
 
 .leadsun-footer__inner {
   display: grid;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, .7fr);
+  gap: 2rem;
 }
+
+.leadsun-footer__brand p { margin: 1rem 0 0; color: var(--ls-text-muted); font-size: .9rem; }
+.leadsun-footer__links { display: grid; align-content: start; gap: .5rem; }
+.site-footer__copyright { grid-column: 1 / -1; margin: 0; color: var(--ls-text-muted); font-size: .8rem; }
+
+@media (max-width: 767.98px) { .leadsun-footer__inner { grid-template-columns: 1fr; } }

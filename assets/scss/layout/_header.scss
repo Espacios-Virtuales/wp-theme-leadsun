@@ -15,5 +15,14 @@
 
 .site-branding { min-width: 0; }
 
+.leadsun-header__cta { flex: 0 0 auto; min-height: 2.5rem; padding-inline: .85rem; white-space: nowrap; }
+
 .custom-logo-link,
 .custom-logo { display: block; max-width: 10rem; height: auto; }
+
+@media (max-width: 991.98px) {
+  .leadsun-header__inner { flex-wrap: wrap; }
+  .leadsun-header__cta { margin-left: auto; }
+}
+
+@media (max-width: 575.98px) { .leadsun-header__cta { display: none; } }

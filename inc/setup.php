@@ -51,15 +51,19 @@ add_action( 'after_setup_theme', 'leadsun_theme_setup' );
  * Keep the local demo navigable when no WordPress menu has been assigned yet.
  */
 function leadsun_primary_navigation_fallback(): void {
-	$items = array(
-		'leadsun_solution'   => __( 'Soluciones', 'leadsun' ),
-		'leadsun_technology' => __( 'Tecnologías', 'leadsun' ),
-		'leadsun_project'    => __( 'Proyectos', 'leadsun' ),
+	$solar     = get_term_by( 'name', 'Solar', 'leadsun_solution_line' );
+	$electric  = get_term_by( 'name', 'Eléctrica', 'leadsun_solution_line' );
+	$items     = array(
+		__( 'Inicio', 'leadsun' )       => home_url( '/' ),
+		__( 'Solar', 'leadsun' )        => $solar ? get_term_link( $solar ) : get_post_type_archive_link( 'leadsun_solution' ),
+		__( 'Eléctrica', 'leadsun' )    => $electric ? get_term_link( $electric ) : get_post_type_archive_link( 'leadsun_solution' ),
+		__( 'Proyectos', 'leadsun' )    => get_post_type_archive_link( 'leadsun_project' ),
+		__( 'Tecnología', 'leadsun' )   => get_post_type_archive_link( 'leadsun_technology' ),
+		__( 'Contacto', 'leadsun' )     => home_url( '/#contacto' ),
 	);
 
 	echo '<ul id="primary-menu" class="navbar-nav ms-auto">';
-	foreach ( $items as $post_type => $label ) {
-		$url = get_post_type_archive_link( $post_type );
+	foreach ( $items as $label => $url ) {
 		if ( $url ) {
 			echo '<li class="menu-item"><a href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a></li>';
 		}
