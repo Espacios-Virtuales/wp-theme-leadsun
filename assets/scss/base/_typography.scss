@@ -1,6 +1,6 @@
 body {
   font-family: $leadsun-font-family-base;
-  font-size: clamp(1rem, 0.98rem + 0.1vw, 1.125rem);
+  font-size: var(--ls-font-size-body);
   line-height: 1.65;
 }
 
@@ -12,10 +12,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.05;
 }
 
-h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); }
-h2 { font-size: clamp(2rem, 4vw, 3.75rem); }
-h3 { font-size: clamp(1.5rem, 2.5vw, 2.25rem); }
-h4 { font-size: clamp(1.25rem, 2vw, 1.625rem); }
+h1 { font-size: var(--ls-font-size-hero); }
+h2 { font-size: var(--ls-font-size-section); }
+h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); }
+h4 { font-size: var(--ls-font-size-card); }
 h5 { font-size: 1.125rem; }
 h6 { font-size: 1rem; }
 

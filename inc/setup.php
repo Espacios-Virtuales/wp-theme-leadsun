@@ -40,8 +40,11 @@ function leadsun_theme_setup(): void {
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'Navegación principal', 'leadsun' ),
-			'footer'  => __( 'Navegación de pie', 'leadsun' ),
+			'primary'          => __( 'Navegación principal', 'leadsun' ),
+			'footer_segment_1' => __( 'Footer · Soluciones', 'leadsun' ),
+			'footer_segment_2' => __( 'Footer · Navegación', 'leadsun' ),
+			'footer_segment_3' => __( 'Footer · Contacto', 'leadsun' ),
+			'social'           => __( 'Redes sociales', 'leadsun' ),
 		)
 	);
 }

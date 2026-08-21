@@ -19,6 +19,11 @@ $extreme_id      = leadsun_home_entity_id( leadsun_field( 'home_extreme_solution
 $extreme_id      = $extreme_id ?: leadsun_home_solution_from_line( 'Solar' );
 $extreme_id      = $extreme_id ?: ( $featured_ids[0] ?? 0 );
 $responsible_id  = leadsun_home_responsible_technology_id();
+$technology_ids  = leadsun_home_featured_entity_ids( 'leadsun_technology', 'home_featured_technology_' );
+$project_ids     = leadsun_home_featured_entity_ids( 'leadsun_project', 'home_featured_project_' );
+$contact_title   = leadsun_field( 'home_contact_title', $home_id, __( '¿TIENES UN PROYECTO DE ILUMINACIÓN?', 'leadsun' ) );
+$contact_text    = leadsun_field( 'home_contact_text', $home_id, __( 'Nuestro equipo puede ayudarte a definir la solución adecuada antes de cotizar.', 'leadsun' ) );
+$contact_channels = leadsun_contact_channels();
 $contact_page    = get_page_by_path( 'contacto' );
 $contact_url     = $contact_page ? get_permalink( $contact_page ) : get_post_type_archive_link( 'leadsun_project' );
 ?>
@@ -58,17 +63,15 @@ $contact_url     = $contact_page ? get_permalink( $contact_page ) : get_post_typ
 		</div>
 	</section>
 
-	<?php $technologies = new WP_Query( array( 'post_type' => 'leadsun_technology', 'post_status' => 'publish', 'posts_per_page' => 3, 'no_found_rows' => true ) ); ?>
 	<section class="home-section home-entities">
 		<div class="leadsun-container"><div class="home-section__heading"><h2>TECNOLOGÍA LEADSUN</h2><a href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_technology' ) ); ?>"><?php esc_html_e( 'Ver tecnología', 'leadsun' ); ?></a></div>
-			<?php if ( $technologies->have_posts() ) : ?><div class="entity-grid"><?php while ( $technologies->have_posts() ) : $technologies->the_post(); get_template_part( 'template-parts/components/entity-card' ); endwhile; ?></div><?php endif; wp_reset_postdata(); ?>
+			<?php if ( $technology_ids ) : ?><div class="entity-grid"><?php foreach ( $technology_ids as $id ) : leadsun_home_render_card( $id ); endforeach; ?></div><?php endif; ?>
 		</div>
 	</section>
 
-	<?php $projects = new WP_Query( array( 'post_type' => 'leadsun_project', 'post_status' => 'publish', 'posts_per_page' => 3, 'no_found_rows' => true ) ); ?>
 	<section class="home-section home-projects">
 		<div class="leadsun-container"><div class="home-section__heading"><h2>PROYECTOS REALES</h2><a class="btn-leadsun-outline" href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_project' ) ); ?>"><?php esc_html_e( 'Ver proyectos', 'leadsun' ); ?></a></div>
-			<?php if ( $projects->have_posts() ) : ?><div class="entity-grid"><?php while ( $projects->have_posts() ) : $projects->the_post(); get_template_part( 'template-parts/components/entity-card' ); endwhile; ?></div><?php endif; wp_reset_postdata(); ?>
+			<?php if ( $project_ids ) : ?><div class="entity-grid"><?php foreach ( $project_ids as $id ) : leadsun_home_render_card( $id ); endforeach; ?></div><?php endif; ?>
 		</div>
 	</section>
 
@@ -81,9 +84,9 @@ $contact_url     = $contact_page ? get_permalink( $contact_page ) : get_post_typ
 			<?php if ( $responsible_id ) : ?><div class="home-feature__media"><img src="<?php echo esc_url( $poster ); ?>" alt=""></div><?php endif; ?></div>
 	</section>
 
-	<section id="certificaciones" class="home-section home-certifications"><div class="leadsun-container"><h2>CERTIFICACIONES</h2><p class="home-certifications__note"><?php esc_html_e( 'Referencias temporales de maqueta; pendientes de validación y material del cliente.', 'leadsun' ); ?></p><ul><?php foreach ( array( 'SEC', 'Resistencia al impacto', 'ISO 9001', 'ISO 14001', 'Certificación Europea' ) as $certification ) : ?><li><?php echo esc_html( $certification ); ?></li><?php endforeach; ?></ul></div></section>
+	<section id="certificaciones" class="home-section home-certifications"><div class="leadsun-container"><h2>CERTIFICACIONES</h2><p class="home-certifications__note"><?php esc_html_e( 'Referencias temporales de maqueta; pendientes de validación y material del cliente.', 'leadsun' ); ?></p><ul><?php $certification_defaults = array( 'SEC', 'Resistencia al impacto', 'ISO 9001', 'ISO 14001', 'Certificación Europea' ); for ( $position = 1; $position <= 5; $position++ ) : $label = leadsun_field( 'home_certification_' . $position . '_label', $home_id, $certification_defaults[ $position - 1 ] ); $image = leadsun_field( 'home_certification_' . $position . '_image', $home_id ); $image_url = is_numeric( $image ) ? wp_get_attachment_image_url( absint( $image ), 'medium' ) : ''; ?><li><?php if ( $image_url ) : ?><img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $label ); ?>"><?php endif; ?><span><?php echo esc_html( $label ); ?></span></li><?php endfor; ?></ul></div></section>
 
-	<section id="contacto" class="home-section home-contact"><div class="leadsun-container"><h2>¿TIENES UN PROYECTO DE ILUMINACIÓN?</h2><p><?php esc_html_e( 'Conversemos sobre la solución adecuada para tu infraestructura.', 'leadsun' ); ?></p><?php if ( $contact_url ) : ?><a class="btn-leadsun" href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Cotizar proyecto', 'leadsun' ); ?></a><?php endif; ?></div></section>
+	<section id="contacto" class="home-section home-contact"><div class="leadsun-container"><h2><?php echo esc_html( $contact_title ); ?></h2><p><?php echo esc_html( $contact_text ); ?></p><?php if ( $contact_url ) : ?><a class="btn-leadsun" href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Evaluar mi proyecto', 'leadsun' ); ?></a><?php endif; ?><ul class="home-contact__channels"><?php foreach ( array( 'whatsapp' => __( 'WhatsApp', 'leadsun' ), 'email' => __( 'Correo', 'leadsun' ), 'phone' => __( 'Teléfono', 'leadsun' ) ) as $key => $label ) : ?><li><span class="home-contact__icon" aria-hidden="true"><?php echo 'email' === $key ? '✉' : ( 'phone' === $key ? '☎' : '◌' ); ?></span><span><strong><?php echo esc_html( $label ); ?></strong><?php if ( ! empty( $contact_channels[ $key ] ) ) : ?><small><?php echo esc_html( $contact_channels[ $key ] ); ?></small><?php endif; ?></span></li><?php endforeach; ?></ul></div></section>
 </main>
 <?php
 get_footer();

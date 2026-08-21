@@ -6,6 +6,10 @@ $leadsun-radius-lg: 8px;
 $leadsun-transition: 180ms ease;
 $leadsun-section-space: clamp(4rem, 7vw, 7rem);
 $leadsun-shadow-sm: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
+$leadsun-font-size-body: clamp(.95rem, .94rem + .08vw, 1rem);
+$leadsun-font-size-hero: clamp(2.25rem, 4vw, 3.75rem);
+$leadsun-font-size-section: clamp(1.5rem, 2.2vw, 2rem);
+$leadsun-font-size-card: clamp(1rem, 1.3vw, 1.25rem);
 
 :root {
   --ls-red: #e21b23;
@@ -26,4 +30,8 @@ $leadsun-shadow-sm: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
   --ls-transition: #{$leadsun-transition};
   --ls-section-space: #{$leadsun-section-space};
   --ls-content-max-width: #{$leadsun-content-max-width};
+  --ls-font-size-body: #{$leadsun-font-size-body};
+  --ls-font-size-hero: #{$leadsun-font-size-hero};
+  --ls-font-size-section: #{$leadsun-font-size-section};
+  --ls-font-size-card: #{$leadsun-font-size-card};
 }

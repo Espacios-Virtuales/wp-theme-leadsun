@@ -11,22 +11,28 @@
 				<?php the_custom_logo(); ?>
 				<p><?php esc_html_e( 'Iluminación profesional para infraestructura.', 'leadsun' ); ?></p>
 			</div>
-			<nav class="leadsun-footer__nav" aria-label="<?php esc_attr_e( 'Navegación de pie', 'leadsun' ); ?>">
+			<nav class="leadsun-footer__segment" aria-label="<?php esc_attr_e( 'Footer soluciones', 'leadsun' ); ?>">
+				<p class="leadsun-footer__heading"><?php esc_html_e( 'Soluciones', 'leadsun' ); ?></p>
 				<?php
 				wp_nav_menu(
 					array(
-						'theme_location' => 'footer',
+						'theme_location' => 'footer_segment_1',
 						'container'      => false,
-						'fallback_cb'    => 'leadsun_primary_navigation_fallback',
+						'fallback_cb'    => false,
 					)
 				);
 				?>
 			</nav>
-			<div class="leadsun-footer__links">
-				<a href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_project' ) ); ?>"><?php esc_html_e( 'Proyectos', 'leadsun' ); ?></a>
-				<a href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_technology' ) ); ?>"><?php esc_html_e( 'Tecnología', 'leadsun' ); ?></a>
-				<a href="<?php echo esc_url( home_url( '/#certificaciones' ) ); ?>"><?php esc_html_e( 'Certificaciones', 'leadsun' ); ?></a>
-				<a href="<?php echo esc_url( home_url( '/#contacto' ) ); ?>"><?php esc_html_e( 'Contacto', 'leadsun' ); ?></a>
+			<nav class="leadsun-footer__segment" aria-label="<?php esc_attr_e( 'Footer navegación', 'leadsun' ); ?>">
+				<p class="leadsun-footer__heading"><?php esc_html_e( 'Navegación', 'leadsun' ); ?></p>
+				<?php wp_nav_menu( array( 'theme_location' => 'footer_segment_2', 'container' => false, 'fallback_cb' => false ) ); ?>
+			</nav>
+			<div class="leadsun-footer__segment leadsun-footer__contact">
+				<p class="leadsun-footer__heading"><?php esc_html_e( 'Contacto', 'leadsun' ); ?></p>
+				<?php wp_nav_menu( array( 'theme_location' => 'footer_segment_3', 'container' => false, 'fallback_cb' => false ) ); ?>
+				<nav class="social-navigation" aria-label="<?php esc_attr_e( 'Redes sociales', 'leadsun' ); ?>">
+					<?php wp_nav_menu( array( 'theme_location' => 'social', 'container' => false, 'menu_class' => 'social-navigation__list', 'fallback_cb' => false ) ); ?>
+				</nav>
 			</div>
 			<p class="site-footer__copyright">
 				&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>

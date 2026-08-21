@@ -94,6 +94,59 @@ function leadsun_home_featured_solution_ids(): array {
 }
 
 /**
+ * Resolve up to three editorial entity slots, falling back to latest posts.
+ *
+ * @return int[]
+ */
+function leadsun_home_featured_entity_ids( string $post_type, string $field_prefix ): array {
+	$page_id  = leadsun_home_page_id();
+	$selected = array();
+
+	foreach ( array( 1, 2, 3 ) as $position ) {
+		$id = leadsun_home_entity_id( leadsun_field( $field_prefix . $position, $page_id ), $post_type );
+		if ( $id && ! in_array( $id, $selected, true ) ) {
+			$selected[] = $id;
+		}
+	}
+
+	if ( count( $selected ) < 3 ) {
+		$fallback = new WP_Query(
+			array(
+				'post_type'      => $post_type,
+				'post_status'    => 'publish',
+				'posts_per_page' => 3 - count( $selected ),
+				'post__not_in'   => $selected,
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+			)
+		);
+		$selected = array_merge( $selected, array_map( 'absint', $fallback->posts ) );
+	}
+
+	return array_slice( $selected, 0, 3 );
+}
+
+/**
+ * Provide structured contact slots without hardcoding business details.
+ *
+ * Integrations can supply WhatsApp and phone via the filter; email defaults to
+ * WordPress' configured administrative email until a global contact source exists.
+ *
+ * @return array<string, string>
+ */
+function leadsun_contact_channels(): array {
+	$channels = array(
+		'whatsapp' => '',
+		'email'    => sanitize_email( get_option( 'admin_email' ) ),
+		'phone'    => '',
+	);
+
+	return apply_filters( 'leadsun_contact_channels', $channels );
+}
+
+/**
  * Find the technology intended for the responsible-lighting section.
  */
 function leadsun_home_responsible_technology_id(): int {

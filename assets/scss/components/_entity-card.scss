@@ -30,7 +30,7 @@
 .entity-card__body { display: grid; flex: 1; gap: .75rem; padding: 1.25rem; }
 .entity-card__eyebrow,
 .entity-card__action { margin: 0; color: var(--ls-red); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.entity-card__title { margin: 0; font-size: clamp(1.35rem, 2vw, 1.65rem); }
+.entity-card__title { margin: 0; font-size: var(--ls-font-size-card); }
 .entity-card__excerpt > p { margin: 0; }
 .entity-card__action { align-self: start; margin-top: auto; }
 .entity-card__link:focus-visible { outline: 3px solid var(--ls-white); outline-offset: -5px; }

@@ -10,12 +10,30 @@
 
 .leadsun-footer__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, .7fr);
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, .75fr));
+  gap: 0;
 }
 
+.leadsun-footer__brand,
+.leadsun-footer__segment { min-height: 10rem; padding: 1rem 2rem; }
+.leadsun-footer__brand { padding-left: 0; }
+.leadsun-footer__segment { border-left: 1px solid var(--ls-border); }
 .leadsun-footer__brand p { margin: 1rem 0 0; color: var(--ls-text-muted); font-size: .9rem; }
-.leadsun-footer__links { display: grid; align-content: start; gap: .5rem; }
-.site-footer__copyright { grid-column: 1 / -1; margin: 0; color: var(--ls-text-muted); font-size: .8rem; }
+.leadsun-footer__heading { margin: 0 0 1rem; color: var(--ls-white); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.leadsun-footer__segment ul { display: grid; gap: .45rem; padding: 0; margin: 0; list-style: none; }
+.leadsun-footer__segment a { font-size: .82rem; }
+.social-navigation { margin-top: 1.25rem; }
+.social-navigation__list { display: flex !important; flex-wrap: wrap; gap: .5rem !important; }
+.social-navigation__list a { display: grid; width: 2rem; height: 2rem; place-items: center; overflow: hidden; color: transparent; border: 1px solid var(--ls-border-strong); border-radius: 50%; }
+.social-navigation__list a::before { content: "•"; color: var(--ls-white); font-size: .7rem; font-weight: 800; }
+.social-navigation__list a[href*="linkedin"]::before { content: "in"; }
+.social-navigation__list a[href*="youtube"]::before { content: "▶"; }
+.social-navigation__list a[href*="instagram"]::before { content: "◎"; }
+.social-navigation__list a[href*="facebook"]::before { content: "f"; }
+.site-footer__copyright { grid-column: 1 / -1; padding-top: 1.25rem; margin: 1.25rem 0 0; color: var(--ls-text-muted); font-size: .8rem; border-top: 1px solid var(--ls-border); }
 
-@media (max-width: 767.98px) { .leadsun-footer__inner { grid-template-columns: 1fr; } }
+@media (max-width: 767.98px) {
+  .leadsun-footer__inner { grid-template-columns: 1fr; }
+  .leadsun-footer__brand,
+  .leadsun-footer__segment { min-height: auto; padding: 1.25rem 0; border-left: 0; border-bottom: 1px solid var(--ls-border); }
+}
