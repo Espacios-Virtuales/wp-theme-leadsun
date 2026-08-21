@@ -1,0 +1,18 @@
+.entity-hero {
+  position: relative;
+  display: grid;
+  min-height: clamp(19rem, 40vw, 34rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, var(--ls-black), var(--ls-surface));
+}
+
+.entity-hero__media,
+.entity-hero__overlay { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; }
+.entity-hero__media { object-fit: cover; }
+.entity-hero__overlay { background: linear-gradient(90deg, rgba(5, 6, 7, .92), rgba(5, 6, 7, .42)); }
+.entity-hero__content { align-self: end; padding-top: var(--ls-section-space); padding-bottom: var(--ls-section-space); }
+.entity-hero__content h1 { max-width: 14ch; margin-bottom: .3em; }
+.entity-hero__excerpt { max-width: 56ch; margin: 0; color: var(--ls-text); font-size: clamp(1.05rem, 1rem + .4vw, 1.3rem); }
+
+@media (max-width: 575.98px) { .entity-hero { min-height: 22rem; } .entity-hero__overlay { background: linear-gradient(0deg, rgba(5, 6, 7, .95), rgba(5, 6, 7, .52)); } }

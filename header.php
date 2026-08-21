@@ -34,7 +34,7 @@
 						'menu_id'        => 'primary-menu',
 						'menu_class'     => 'navbar-nav ms-auto',
 						'container'      => false,
-						'fallback_cb'    => 'wp_page_menu',
+						'fallback_cb'    => 'leadsun_primary_navigation_fallback',
 					)
 				);
 				?>
