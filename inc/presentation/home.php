@@ -175,12 +175,17 @@ function leadsun_home_responsible_technology_id(): int {
  * Render the existing generic card in a manually selected Home slot.
  */
 function leadsun_home_render_card( int $post_id ): void {
-	$post = get_post( $post_id );
-	if ( ! $post ) {
+	$post_id = absint( $post_id );
+
+	if ( ! $post_id || 'publish' !== get_post_status( $post_id ) ) {
 		return;
 	}
 
-	setup_postdata( $post );
-	get_template_part( 'template-parts/components/entity-card' );
-	wp_reset_postdata();
+	get_template_part(
+		'template-parts/components/entity-card',
+		null,
+		array(
+			'post_id' => $post_id,
+		)
+	);
 }
