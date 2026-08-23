@@ -48,12 +48,16 @@
 }
 
 @media (min-width: 992px) {
+  .main-navigation { align-items: center; }
+
   .main-navigation > div > ul,
   .main-navigation > ul {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: clamp(1.5rem, 1.75vw, 2rem);
   }
+
+  .main-navigation .leadsun-header__cta { margin-left: clamp(1.5rem, 2vw, 2.5rem); }
 
   .main-navigation .menu-item-has-children { position: relative; }
 
