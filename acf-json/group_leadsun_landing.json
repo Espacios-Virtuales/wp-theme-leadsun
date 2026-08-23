@@ -7,7 +7,7 @@
             "label": "Línea de solución",
             "name": "landing_solution_line",
             "type": "taxonomy",
-            "taxonomy": ["leadsun_solution_line"],
+            "taxonomy": "leadsun_solution_line",
             "field_type": "select",
             "allow_null": 1,
             "return_format": "id",
