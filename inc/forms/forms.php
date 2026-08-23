@@ -22,14 +22,30 @@ function leadsun_landing_form_type( int $page_id ): string {
 /**
  * Validate only a post directed to the specified form, without delivering it.
  *
- * @return array{valid: bool|null, data: array<string, mixed>, errors: array<string, string>}
+ * @return array{valid: bool|null, data: array<string, mixed>, errors: array<string, string>, success: string}
  */
 function leadsun_form_submission_state( string $form_type ): array {
 	$empty_state = array(
-		'valid'  => null,
-		'data'   => array(),
-		'errors' => array(),
+		'valid'   => null,
+		'data'    => array(),
+		'errors'  => array(),
+		'success' => '',
 	);
+	$query         = wp_unslash( $_GET );
+	$success_nonce = sanitize_text_field( leadsun_form_request_value( $query, 'leadsun_form_success' ) );
+	$success_state = sanitize_key( leadsun_form_request_value( $query, 'leadsun_form_status' ) );
+	$success_type  = sanitize_key( leadsun_form_request_value( $query, 'leadsun_form_type' ) );
+	if (
+		'success' === $success_state
+		&& $form_type === $success_type
+		&& wp_verify_nonce( $success_nonce, 'leadsun_form_success_' . $form_type . '_' . get_queried_object_id() )
+	) {
+		$empty_state['valid']   = true;
+		$empty_state['success'] = 'quote' === $form_type
+			? __( 'Gracias por contactarnos. Hemos recibido los antecedentes de su proyecto. Nuestro equipo técnico revisará la información y se pondrá en contacto a la brevedad para evaluar la solución LEADSUN más adecuada.', 'leadsun' )
+			: __( 'Gracias por contactarnos. Hemos recibido tu mensaje y nuestro equipo lo revisará a la brevedad.', 'leadsun' );
+		return $empty_state;
+	}
 
 	$submitted_request = wp_unslash( $_POST );
 	$submitted_type    = sanitize_key( leadsun_form_request_value( $submitted_request, 'leadsun_form_type' ) );
@@ -37,7 +53,20 @@ function leadsun_form_submission_state( string $form_type ): array {
 		return $empty_state;
 	}
 
-	return 'quote' === $form_type ? leadsun_validate_quote_submission() : leadsun_validate_contact_submission();
+	if ( ! empty( $GLOBALS['leadsun_form_delivery_states'][ $form_type ] ) ) {
+		$state                  = $GLOBALS['leadsun_form_delivery_states'][ $form_type ];
+		$state['valid']         = false;
+		$state['errors']['form'] = $GLOBALS['leadsun_form_delivery_errors'][ $form_type ] ?? '';
+		return $state + array( 'success' => '' );
+	}
+
+	$state = 'quote' === $form_type ? leadsun_validate_quote_submission() : leadsun_validate_contact_submission();
+	if ( ! empty( $GLOBALS['leadsun_form_delivery_errors'][ $form_type ] ) ) {
+		$state['valid']          = false;
+		$state['errors']['form'] = $GLOBALS['leadsun_form_delivery_errors'][ $form_type ];
+	}
+
+	return $state + array( 'success' => '' );
 }
 
 /**
@@ -81,7 +110,11 @@ function leadsun_form_feedback( array $state ): void {
 		echo '<div class="leadsun-form__notice leadsun-form__notice--error" role="alert">' . esc_html( $state['errors']['form'] ) . '</div>';
 	}
 
-	// C02 will reveal this confirmation only after successful delivery.
+	if ( ! empty( $state['success'] ) ) {
+		echo '<div class="leadsun-form__notice leadsun-form__notice--success" role="status" aria-live="polite">' . esc_html( $state['success'] ) . '</div>';
+		return;
+	}
+
 	echo '<div class="leadsun-form__notice leadsun-form__notice--success" aria-live="polite" hidden></div>';
 }
 

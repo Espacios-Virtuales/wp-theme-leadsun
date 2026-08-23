@@ -134,16 +134,21 @@ function leadsun_form_request_value( array $request, string $key ): string {
  * @return array{file?: array<string, mixed>, error?: string}
  */
 function leadsun_validate_quote_attachment( array $file ): array {
-	if ( empty( $file ) || UPLOAD_ERR_NO_FILE === (int) ( $file['error'] ?? UPLOAD_ERR_NO_FILE ) ) {
+	$upload_error = isset( $file['error'] ) && is_scalar( $file['error'] ) ? (int) $file['error'] : UPLOAD_ERR_NO_FILE;
+	$tmp_name     = isset( $file['tmp_name'] ) && is_scalar( $file['tmp_name'] ) ? (string) $file['tmp_name'] : '';
+	$filename_raw = isset( $file['name'] ) && is_scalar( $file['name'] ) ? (string) $file['name'] : '';
+	$file_size    = isset( $file['size'] ) && is_scalar( $file['size'] ) ? (int) $file['size'] : 0;
+
+	if ( empty( $file ) || UPLOAD_ERR_NO_FILE === $upload_error ) {
 		return array();
 	}
 
-	if ( UPLOAD_ERR_OK !== (int) ( $file['error'] ?? UPLOAD_ERR_NO_FILE ) || empty( $file['tmp_name'] ) ) {
+	if ( UPLOAD_ERR_OK !== $upload_error || '' === $tmp_name || '' === $filename_raw ) {
 		return array( 'error' => __( 'No fue posible cargar el archivo adjunto.', 'leadsun' ) );
 	}
 
 	$max_size = 10 * MB_IN_BYTES;
-	if ( (int) ( $file['size'] ?? 0 ) > $max_size ) {
+	if ( $file_size > $max_size ) {
 		return array( 'error' => __( 'El archivo adjunto no puede superar los 10 MB.', 'leadsun' ) );
 	}
 
@@ -157,8 +162,8 @@ function leadsun_validate_quote_attachment( array $file ): array {
 		'xls'  => 'application/vnd.ms-excel',
 		'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	);
-	$filename      = sanitize_file_name( (string) ( $file['name'] ?? '' ) );
-	$file_info     = wp_check_filetype_and_ext( (string) $file['tmp_name'], $filename, $allowed_mimes );
+	$filename      = sanitize_file_name( $filename_raw );
+	$file_info     = wp_check_filetype_and_ext( $tmp_name, $filename, $allowed_mimes );
 
 	if ( empty( $file_info['ext'] ) || empty( $file_info['type'] ) || ! isset( $allowed_mimes[ $file_info['ext'] ] ) ) {
 		return array( 'error' => __( 'El archivo debe ser PDF, imagen JPG/PNG, Word o Excel.', 'leadsun' ) );
@@ -168,8 +173,8 @@ function leadsun_validate_quote_attachment( array $file ): array {
 		'file' => array(
 			'name'     => $filename,
 			'type'     => $file_info['type'],
-			'tmp_name' => (string) $file['tmp_name'],
-			'size'     => (int) $file['size'],
+			'tmp_name' => $tmp_name,
+			'size'     => $file_size,
 		),
 	);
 }
