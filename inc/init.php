@@ -24,5 +24,6 @@ require_once __DIR__ . '/presentation/landings.php';
 require_once __DIR__ . '/forms/validation.php';
 require_once __DIR__ . '/forms/forms.php';
 require_once __DIR__ . '/forms/settings.php';
+require_once __DIR__ . '/forms/whatsapp.php';
 require_once __DIR__ . '/forms/mail.php';
 require_once __DIR__ . '/forms/handlers.php';

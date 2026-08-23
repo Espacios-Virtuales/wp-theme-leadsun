@@ -7,6 +7,9 @@
 
 .site-footer a { color: var(--ls-text-muted); text-decoration: none; }
 .site-footer a:hover { color: var(--ls-white); }
+.leadsun-whatsapp-float { position: fixed; z-index: 15; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); display: grid; width: 3rem; height: 3rem; place-items: center; color: var(--ls-white); border: 1px solid var(--ls-white); border-radius: 50%; background: #1f9d55; box-shadow: var(--ls-shadow-sm); text-decoration: none; }
+.leadsun-whatsapp-float:hover, .leadsun-whatsapp-float:focus-visible { color: var(--ls-white); background: #167845; }
+.leadsun-whatsapp-float span { font-size: .68rem; font-weight: 900; letter-spacing: .04em; }
 
 .leadsun-footer__inner {
   display: grid;

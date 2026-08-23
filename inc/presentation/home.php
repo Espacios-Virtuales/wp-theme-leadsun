@@ -138,7 +138,7 @@ function leadsun_home_featured_entity_ids( string $post_type, string $field_pref
  */
 function leadsun_contact_channels(): array {
 	$channels = array(
-		'whatsapp' => '',
+		'whatsapp' => leadsun_whatsapp_number(),
 		'email'    => sanitize_email( get_option( 'admin_email' ) ),
 		'phone'    => '',
 	);

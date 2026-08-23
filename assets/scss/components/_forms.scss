@@ -30,6 +30,9 @@
 .leadsun-form input[type="radio"] { width: 1rem; accent-color: var(--ls-red); }
 .leadsun-form input[type="file"] { padding: .6rem; }
 .leadsun-form__help { margin: 0; color: var(--ls-text-muted); font-size: 0.8rem; }
+.leadsun-form__whatsapp { margin: 1rem 0 0; color: var(--ls-text-muted); font-size: .9rem; }
+.leadsun-form__whatsapp a { color: var(--ls-white); font-weight: 800; }
+.leadsun-form__whatsapp--error { margin-top: -.5rem; }
 .leadsun-form__honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .leadsun-form__notice { margin: 0; padding: .85rem 1rem; border-radius: var(--ls-radius-sm); }
 .leadsun-form__notice--error { border: 1px solid #ff777c; color: #ffb0b3; background: rgba(226, 27, 35, .12); }

@@ -108,6 +108,10 @@ function leadsun_form_value( array $state, string $key ): string {
 function leadsun_form_feedback( array $state ): void {
 	if ( ! empty( $state['errors']['form'] ) ) {
 		echo '<div class="leadsun-form__notice leadsun-form__notice--error" role="alert">' . esc_html( $state['errors']['form'] ) . '</div>';
+		$whatsapp_url = leadsun_whatsapp_url();
+		if ( $whatsapp_url ) {
+			echo '<p class="leadsun-form__whatsapp leadsun-form__whatsapp--error"><a href="' . esc_url( $whatsapp_url ) . '" target="_blank" rel="noopener">' . esc_html__( '¿Prefieres WhatsApp? Hablar por WhatsApp', 'leadsun' ) . '</a></p>';
+		}
 	}
 
 	if ( ! empty( $state['success'] ) ) {

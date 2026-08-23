@@ -43,5 +43,6 @@ $project_stages   = array( 'Evaluación', 'Diseño / especificación', 'Cotizaci
 			<div class="leadsun-field leadsun-field--full<?php echo ! empty( $state['errors']['quote_attachment'] ) ? ' leadsun-field--error' : ''; ?>"><label for="quote-attachment"><?php esc_html_e( 'Adjuntar antecedentes', 'leadsun' ); ?></label><input id="quote-attachment" name="quote_attachment" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,application/pdf,image/jpeg,image/png,application/msword,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-invalid="<?php echo ! empty( $state['errors']['quote_attachment'] ) ? 'true' : 'false'; ?>" aria-describedby="quote_attachment-help quote_attachment-error"><p id="quote_attachment-help" class="leadsun-form__help"><?php esc_html_e( 'PDF, JPG, PNG, Word o Excel. Máximo 10 MB.', 'leadsun' ); ?></p><?php leadsun_form_field_error( $state, 'quote_attachment' ); ?></div>
 			<button class="btn-leadsun" type="submit"><?php esc_html_e( 'Enviar solicitud', 'leadsun' ); ?></button>
 		</form>
+		<?php get_template_part( 'template-parts/forms/whatsapp-link' ); ?>
 	</div>
 </section>

@@ -40,6 +40,10 @@
 		</div>
 	</footer>
 </div>
+<?php $leadsun_whatsapp_url = leadsun_whatsapp_url(); ?>
+<?php if ( $leadsun_whatsapp_url ) : ?>
+	<a class="leadsun-whatsapp-float" href="<?php echo esc_url( $leadsun_whatsapp_url ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Hablar por WhatsApp', 'leadsun' ); ?>"><span aria-hidden="true">WA</span></a>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 </html>

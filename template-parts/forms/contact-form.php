@@ -22,5 +22,6 @@ $state = leadsun_form_submission_state( 'contact' );
 			<div class="leadsun-field<?php echo ! empty( $state['errors']['contact_message'] ) ? ' leadsun-field--error' : ''; ?>"><label for="contact-message"><?php esc_html_e( 'Mensaje', 'leadsun' ); ?> *</label><textarea id="contact-message" name="contact_message" required aria-invalid="<?php echo ! empty( $state['errors']['contact_message'] ) ? 'true' : 'false'; ?>" aria-describedby="contact_message-error"><?php echo esc_textarea( $state['data']['message'] ?? '' ); ?></textarea><?php leadsun_form_field_error( $state, 'contact_message' ); ?></div>
 			<button class="btn-leadsun" type="submit"><?php esc_html_e( 'Enviar consulta', 'leadsun' ); ?></button>
 		</form>
+		<?php get_template_part( 'template-parts/forms/whatsapp-link' ); ?>
 	</div>
 </section>

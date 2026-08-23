@@ -24,6 +24,24 @@ function leadsun_register_forms_settings(): void {
 	);
 	register_setting(
 		'leadsun_forms',
+		'leadsun_whatsapp_number',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'leadsun_sanitize_whatsapp_number',
+			'default'           => '',
+		)
+	);
+	register_setting(
+		'leadsun_forms',
+		'leadsun_whatsapp_default_message',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_textarea_field',
+			'default'           => __( 'Hola, quisiera consultar por un proyecto de iluminación LEADSUN.', 'leadsun' ),
+		)
+	);
+	register_setting(
+		'leadsun_forms',
 		'leadsun_forms_cc_recipients',
 		array(
 			'type'              => 'string',
@@ -60,6 +78,8 @@ function leadsun_render_forms_settings_page(): void {
 			<table class="form-table" role="presentation">
 				<tr><th scope="row"><label for="leadsun_forms_primary_recipient"><?php esc_html_e( 'Destinatario principal', 'leadsun' ); ?></label></th><td><input class="regular-text" id="leadsun_forms_primary_recipient" name="leadsun_forms_primary_recipient" type="email" value="<?php echo esc_attr( get_option( 'leadsun_forms_primary_recipient', 'ventas@leadsun.cl' ) ); ?>"><p class="description"><?php esc_html_e( 'Si no es válido, se utilizará el correo administrador del sitio.', 'leadsun' ); ?></p></td></tr>
 				<tr><th scope="row"><label for="leadsun_forms_cc_recipients"><?php esc_html_e( 'Copias (Cc)', 'leadsun' ); ?></label></th><td><textarea class="large-text" id="leadsun_forms_cc_recipients" name="leadsun_forms_cc_recipients" rows="3"><?php echo esc_textarea( get_option( 'leadsun_forms_cc_recipients', 'proyectos@leadsun.cl' ) ); ?></textarea><p class="description"><?php esc_html_e( 'Uno o más correos, separados por coma o por línea.', 'leadsun' ); ?></p></td></tr>
+				<tr><th scope="row"><label for="leadsun_whatsapp_number"><?php esc_html_e( 'Número WhatsApp', 'leadsun' ); ?></label></th><td><input class="regular-text" id="leadsun_whatsapp_number" name="leadsun_whatsapp_number" type="tel" value="<?php echo esc_attr( get_option( 'leadsun_whatsapp_number', '' ) ); ?>"><p class="description"><?php esc_html_e( 'Incluye código de país. Se conservarán sólo dígitos.', 'leadsun' ); ?></p></td></tr>
+				<tr><th scope="row"><label for="leadsun_whatsapp_default_message"><?php esc_html_e( 'Mensaje inicial WhatsApp', 'leadsun' ); ?></label></th><td><textarea class="large-text" id="leadsun_whatsapp_default_message" name="leadsun_whatsapp_default_message" rows="3"><?php echo esc_textarea( get_option( 'leadsun_whatsapp_default_message', __( 'Hola, quisiera consultar por un proyecto de iluminación LEADSUN.', 'leadsun' ) ) ); ?></textarea></td></tr>
 			</table>
 			<?php submit_button(); ?>
 		</form>
@@ -82,6 +102,13 @@ function leadsun_sanitize_cc_recipients( $value ): string {
 	$recipients = leadsun_forms_parse_recipients( $value );
 
 	return implode( ', ', $recipients );
+}
+
+/**
+ * Retain only digits in the configured WhatsApp number.
+ */
+function leadsun_sanitize_whatsapp_number( $value ): string {
+	return is_scalar( $value ) ? (string) preg_replace( '/\D+/', '', (string) $value ) : '';
 }
 
 /**
