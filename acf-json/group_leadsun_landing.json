@@ -1,0 +1,26 @@
+{
+    "key": "group_leadsun_landing",
+    "title": "LEADSUN · Landing",
+    "fields": [
+        {
+            "key": "field_leadsun_landing_solution_line",
+            "label": "Línea de solución",
+            "name": "landing_solution_line",
+            "type": "taxonomy",
+            "taxonomy": ["leadsun_solution_line"],
+            "field_type": "select",
+            "allow_null": 1,
+            "return_format": "id",
+            "multiple": 0
+        }
+    ],
+    "location": [[{"param": "page_template", "operator": "==", "value": "page-leadsun-landing.php"}]],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1787529600
+}

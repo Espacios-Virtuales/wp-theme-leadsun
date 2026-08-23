@@ -24,8 +24,7 @@ $project_ids     = leadsun_home_featured_entity_ids( 'leadsun_project', 'home_fe
 $contact_title   = leadsun_field( 'home_contact_title', $home_id, __( '¿TIENES UN PROYECTO DE ILUMINACIÓN?', 'leadsun' ) );
 $contact_text    = leadsun_field( 'home_contact_text', $home_id, __( 'Nuestro equipo puede ayudarte a definir la solución adecuada antes de cotizar.', 'leadsun' ) );
 $contact_channels = leadsun_contact_channels();
-$contact_page    = get_page_by_path( 'contacto' );
-$contact_url     = $contact_page ? get_permalink( $contact_page ) : get_post_type_archive_link( 'leadsun_project' );
+$contact_url     = leadsun_quote_page_url();
 ?>
 <main id="primary" class="site-main">
 	<section class="home-hero">

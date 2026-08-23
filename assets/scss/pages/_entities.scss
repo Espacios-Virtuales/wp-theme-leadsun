@@ -2,6 +2,11 @@
 .entity-empty { padding: 1.5rem; color: var(--ls-text-muted); background: var(--ls-surface); border: 1px solid var(--ls-border); }
 .entity-preview__header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
 .entity-preview__header h2 { margin: 0; }
+.leadsun-landing__content { padding-bottom: clamp(1.5rem, 3vw, 3rem); }
+.leadsun-landing__content .entry-content > :first-child { margin-top: 0; }
+.leadsun-landing__solutions { padding-top: clamp(1.5rem, 3vw, 3rem); }
+.leadsun-landing__solutions h2 { margin-bottom: 1.5rem; }
+.leadsun-landing__quote-form { min-height: 1px; }
 
 .entity-single__layout {
   display: grid;
