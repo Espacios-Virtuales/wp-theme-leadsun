@@ -12,6 +12,20 @@
             "allow_null": 1,
             "return_format": "id",
             "multiple": 0
+        },
+        {
+            "key": "field_leadsun_landing_form_type",
+            "label": "Tipo de formulario",
+            "name": "landing_form_type",
+            "type": "select",
+            "choices": {
+                "none": "Sin formulario",
+                "contact": "Contacto",
+                "quote": "Cotizar Proyecto"
+            },
+            "default_value": "none",
+            "allow_null": 0,
+            "return_format": "value"
         }
     ],
     "location": [[{"param": "page_template", "operator": "==", "value": "page-leadsun-landing.php"}]],
@@ -22,5 +36,5 @@
     "instruction_placement": "label",
     "active": true,
     "show_in_rest": 0,
-    "modified": 1787529600
+    "modified": 1787616000
 }

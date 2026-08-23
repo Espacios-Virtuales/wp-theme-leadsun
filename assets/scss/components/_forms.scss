@@ -1,5 +1,8 @@
 .leadsun-form { display: grid; gap: 1.25rem; }
 .leadsun-field { display: grid; gap: 0.5rem; }
+.leadsun-form-section__inner { max-width: 62rem; }
+.leadsun-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.leadsun-field--full { grid-column: 1 / -1; }
 
 .leadsun-form input,
 .leadsun-form select,
@@ -25,8 +28,19 @@
 .leadsun-form textarea:focus { border-color: var(--ls-red); background: var(--ls-surface-elevated); }
 .leadsun-form input[type="checkbox"],
 .leadsun-form input[type="radio"] { width: 1rem; accent-color: var(--ls-red); }
+.leadsun-form input[type="file"] { padding: .6rem; }
 .leadsun-form__help { margin: 0; color: var(--ls-text-muted); font-size: 0.8rem; }
+.leadsun-form__honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.leadsun-form__notice { margin: 0; padding: .85rem 1rem; border-radius: var(--ls-radius-sm); }
+.leadsun-form__notice--error { border: 1px solid #ff777c; color: #ffb0b3; background: rgba(226, 27, 35, .12); }
+.leadsun-form__notice--success { border: 1px solid #78c78a; color: #b8e6c1; background: rgba(76, 175, 80, .12); }
 .leadsun-field--error input,
 .leadsun-field--error select,
 .leadsun-field--error textarea { border-color: var(--ls-red); }
 .leadsun-field__error { margin: 0; color: #ff777c; font-size: 0.8rem; }
+
+@media (max-width: 767.98px) {
+  .leadsun-form__grid { grid-template-columns: 1fr; }
+  .leadsun-field--full { grid-column: auto; }
+  .leadsun-form .btn-leadsun { width: 100%; }
+}

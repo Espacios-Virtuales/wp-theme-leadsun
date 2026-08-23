@@ -17,6 +17,7 @@ get_header();
 		$term_id = leadsun_landing_solution_line_id( $page_id );
 		$term    = $term_id ? get_term( $term_id, 'leadsun_solution_line' ) : null;
 		$poster  = get_the_post_thumbnail_url( $page_id, 'full' );
+		$form_type = leadsun_landing_form_type( $page_id );
 
 		get_template_part(
 			'template-parts/components/entity-hero',
@@ -53,11 +54,13 @@ get_header();
 			</section>
 		<?php endif; ?>
 
-		<?php if ( 'cotizar-proyecto' === get_post_field( 'post_name', $page_id ) ) : ?>
-			<section id="cotizacion-form" class="leadsun-landing__quote-form leadsun-section" aria-label="<?php esc_attr_e( 'Formulario de cotización', 'leadsun' ); ?>">
-				<!-- formulario L04 -->
-			</section>
-		<?php endif; ?>
+		<?php
+		if ( 'contact' === $form_type ) {
+			get_template_part( 'template-parts/forms/contact-form' );
+		} elseif ( 'quote' === $form_type ) {
+			get_template_part( 'template-parts/forms/quote-form' );
+		}
+		?>
 	<?php endwhile; ?>
 </main>
 <?php
