@@ -28,8 +28,24 @@
   background: var(--ls-surface-elevated);
 }
 
-.navbar-toggler { border-color: var(--ls-border-strong); }
-.navbar-toggler-icon { filter: invert(1); }
+.navbar-toggler {
+  border-color: var(--ls-border-strong);
+}
+
+.navbar-toggler-icon {
+  margin: 0;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-toggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+}
 
 @media (min-width: 992px) {
   .main-navigation > div > ul,

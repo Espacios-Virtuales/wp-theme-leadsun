@@ -38,7 +38,7 @@
 					)
 				);
 				?>
+				<a class="btn-leadsun leadsun-header__cta" href="<?php echo esc_url( leadsun_quote_page_url() ); ?>"><?php esc_html_e( 'Cotizar proyecto', 'leadsun' ); ?></a>
 			</nav>
-			<a class="btn-leadsun leadsun-header__cta" href="<?php echo esc_url( leadsun_quote_page_url() ); ?>"><?php esc_html_e( 'Cotizar proyecto', 'leadsun' ); ?></a>
 		</div>
 	</header>

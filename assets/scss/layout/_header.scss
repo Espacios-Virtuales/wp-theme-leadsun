@@ -22,7 +22,11 @@
 
 @media (max-width: 991.98px) {
   .leadsun-header__inner { flex-wrap: wrap; }
-  .leadsun-header__cta { margin-left: auto; }
+  .main-navigation { flex-basis: 100%; }
+  .main-navigation .leadsun-header__cta {
+    display: flex;
+    width: 100%;
+    margin: .75rem 0 0;
+    justify-content: center;
+  }
 }
-
-@media (max-width: 575.98px) { .leadsun-header__cta { display: none; } }
