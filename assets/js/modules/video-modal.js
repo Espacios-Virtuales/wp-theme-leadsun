@@ -17,6 +17,18 @@ const resetModal = (modal) => {
   modal.hidden = true;
 };
 
+const playbackUrl = (embedUrl) => {
+  const url = new URL(embedUrl);
+  url.search = new URLSearchParams({
+    autoplay: '1',
+    mute: '1',
+    rel: '0',
+    playsinline: '1',
+    modestbranding: '1',
+  }).toString();
+  return url.toString();
+};
+
 export function initVideoModals() {
   const triggers = document.querySelectorAll('[data-video-modal-trigger]');
   if (!triggers.length) {
@@ -38,7 +50,7 @@ export function initVideoModals() {
       }
 
       const iframe = document.createElement('iframe');
-      iframe.src = embedUrl;
+      iframe.src = playbackUrl(embedUrl);
       iframe.title = trigger.dataset.videoTitle || 'Video';
       iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
       iframe.allowFullscreen = true;
