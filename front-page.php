@@ -29,16 +29,16 @@ $whatsapp_url    = leadsun_whatsapp_url();
 ?>
 <main id="primary" class="site-main">
 	<section class="home-hero">
-		<img class="home-hero__media" src="<?php echo esc_url( $hero_image_url ); ?>" alt="" aria-hidden="true">
+		<?php if ( $hero_video ) : ?>
+			<?php get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $hero_video, 'poster_url' => $hero_image_url, 'title' => __( 'Video LEADSUN', 'leadsun' ), 'class_name' => 'home-hero__media' ) ); ?>
+		<?php else : ?>
+			<img class="home-hero__media" src="<?php echo esc_url( $hero_image_url ); ?>" alt="" aria-hidden="true">
+		<?php endif; ?>
 		<div class="home-hero__overlay"></div>
 		<div class="leadsun-container home-hero__content">
 			<h1><?php echo wp_kses_post( nl2br( esc_html( $hero_title ) ) ); ?></h1>
 			<p><?php echo esc_html( $hero_text ); ?></p>
 			<a class="btn-leadsun" href="#soluciones"><?php esc_html_e( 'Conoce nuestras soluciones', 'leadsun' ); ?></a>
-			<?php if ( $hero_video ) : $modal_id = leadsun_video_modal_id(); ?>
-				<?php get_template_part( 'template-parts/components/video-trigger', null, array( 'video' => $hero_video, 'modal_id' => $modal_id, 'poster_url' => $hero_image_url, 'title' => __( 'Reproducir video LEADSUN', 'leadsun' ) ) ); ?>
-				<?php get_template_part( 'template-parts/components/video-modal', null, array( 'modal_id' => $modal_id, 'title' => __( 'Video LEADSUN', 'leadsun' ) ) ); ?>
-			<?php endif; ?>
 		</div>
 	</section>
 
@@ -53,12 +53,11 @@ $whatsapp_url    = leadsun_whatsapp_url();
 	<section class="home-section home-extreme">
 		<div class="leadsun-container home-feature">
 			<div class="home-feature__content"><h2>BLACK DUALFACE<br>DISEÑADA PARA<br>CONDICIONES EXTREMAS</h2>
-			<?php if ( $extreme_id ) : $config = leadsun_entity_config( 'leadsun_solution' ); $poster = leadsun_entity_poster_url( $extreme_id, $config['secondary_field'] ); ?>
+			<?php if ( $extreme_id ) : $config = leadsun_entity_config( 'leadsun_solution' ); $poster = leadsun_entity_poster_url( $extreme_id, $config['secondary_field'] ); $video = leadsun_youtube_video( leadsun_field( 'solution_youtube_url', $extreme_id ) ); ?>
 				<p><?php echo esc_html( get_the_excerpt( $extreme_id ) ); ?></p><a class="btn-leadsun-outline" href="<?php echo esc_url( get_permalink( $extreme_id ) ); ?>"><?php esc_html_e( 'Ver solución', 'leadsun' ); ?></a>
-				<?php $video = leadsun_youtube_video( leadsun_field( 'solution_youtube_url', $extreme_id ) ); if ( $video ) : $modal_id = leadsun_video_modal_id(); get_template_part( 'template-parts/components/video-trigger', null, array( 'video' => $video, 'modal_id' => $modal_id, 'poster_url' => $poster, 'title' => __( 'Reproducir video de solución', 'leadsun' ) ) ); get_template_part( 'template-parts/components/video-modal', null, array( 'modal_id' => $modal_id, 'title' => get_the_title( $extreme_id ) ) ); endif; ?>
 			<?php endif; ?></div>
 			<?php if ( $extreme_id ) : ?>
-				<div class="home-feature__media"><img src="<?php echo esc_url( $poster ); ?>" alt=""></div>
+				<div class="home-feature__media"><?php if ( $video ) : get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $video, 'poster_url' => $poster, 'title' => __( 'Video de solución', 'leadsun' ) ) ); else : ?><img src="<?php echo esc_url( $poster ); ?>" alt=""><?php endif; ?></div>
 			<?php endif; ?>
 		</div>
 	</section>
@@ -77,11 +76,10 @@ $whatsapp_url    = leadsun_whatsapp_url();
 
 	<section class="home-section home-responsible">
 		<div class="leadsun-container home-feature home-feature--reverse"><div class="home-feature__content"><h2>ILUMINACIÓN RESPONSABLE</h2>
-			<?php if ( $responsible_id ) : $config = leadsun_entity_config( 'leadsun_technology' ); $poster = leadsun_entity_poster_url( $responsible_id, $config['secondary_field'] ); ?>
+			<?php if ( $responsible_id ) : $config = leadsun_entity_config( 'leadsun_technology' ); $poster = leadsun_entity_poster_url( $responsible_id, $config['secondary_field'] ); $video = leadsun_youtube_video( leadsun_field( 'technology_youtube_url', $responsible_id ) ); ?>
 				<p><?php echo esc_html( get_the_excerpt( $responsible_id ) ); ?></p><a class="btn-leadsun-outline" href="<?php echo esc_url( get_permalink( $responsible_id ) ); ?>"><?php esc_html_e( 'Ver tecnología', 'leadsun' ); ?></a>
-				<?php $video = leadsun_youtube_video( leadsun_field( 'technology_youtube_url', $responsible_id ) ); if ( $video ) : $modal_id = leadsun_video_modal_id(); get_template_part( 'template-parts/components/video-trigger', null, array( 'video' => $video, 'modal_id' => $modal_id, 'poster_url' => $poster, 'title' => __( 'Reproducir video de tecnología', 'leadsun' ) ) ); get_template_part( 'template-parts/components/video-modal', null, array( 'modal_id' => $modal_id, 'title' => get_the_title( $responsible_id ) ) ); endif; ?>
 			<?php endif; ?></div>
-			<?php if ( $responsible_id ) : ?><div class="home-feature__media"><img src="<?php echo esc_url( $poster ); ?>" alt=""></div><?php endif; ?></div>
+			<?php if ( $responsible_id ) : ?><div class="home-feature__media"><?php if ( $video ) : get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $video, 'poster_url' => $poster, 'title' => __( 'Video de tecnología', 'leadsun' ) ) ); else : ?><img src="<?php echo esc_url( $poster ); ?>" alt=""><?php endif; ?></div><?php endif; ?></div>
 	</section>
 
 	<section id="certificaciones" class="home-section home-certifications"><div class="leadsun-container"><h2>CERTIFICACIONES</h2><p class="home-certifications__note"><?php esc_html_e( 'Referencias temporales de maqueta; pendientes de validación y material del cliente.', 'leadsun' ); ?></p><ul><?php $certification_defaults = array( 'SEC', 'Resistencia al impacto', 'ISO 9001', 'ISO 14001', 'Certificación Europea' ); for ( $position = 1; $position <= 5; $position++ ) : $label = leadsun_field( 'home_certification_' . $position . '_label', $home_id, $certification_defaults[ $position - 1 ] ); $image = leadsun_field( 'home_certification_' . $position . '_image', $home_id ); $image_url = is_numeric( $image ) ? wp_get_attachment_image_url( absint( $image ), 'medium' ) : ''; ?><li><?php if ( $image_url ) : ?><img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $label ); ?>"><?php endif; ?><span><?php echo esc_html( $label ); ?></span></li><?php endfor; ?></ul></div></section>

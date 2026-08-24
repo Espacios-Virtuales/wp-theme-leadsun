@@ -15,6 +15,7 @@ const resetModal = (modal) => {
     frame.replaceChildren();
   }
   modal.hidden = true;
+  modal._leadsunTrigger?.focus();
 };
 
 const playbackUrl = (embedUrl) => {
@@ -25,6 +26,7 @@ const playbackUrl = (embedUrl) => {
     rel: '0',
     playsinline: '1',
     modestbranding: '1',
+    controls: '1',
   }).toString();
   return url.toString();
 };
@@ -39,24 +41,28 @@ export function initVideoModals() {
     resetModal(modal);
   };
 
+  const openModal = (modal, embedUrl, title, trigger) => {
+    const frame = modal?.querySelector('[data-video-modal-frame]');
+    if (!modal || !frame || !isSafeEmbedUrl(embedUrl)) {
+      return;
+    }
+
+    const iframe = document.createElement('iframe');
+    iframe.src = playbackUrl(embedUrl);
+    iframe.title = title || 'Video';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    modal._leadsunTrigger = trigger;
+    frame.replaceChildren(iframe);
+    modal.hidden = false;
+    modal.querySelector('[data-video-modal-close]')?.focus();
+  };
+
   triggers.forEach((trigger) => {
     trigger.addEventListener('click', () => {
       const modal = document.getElementById(trigger.dataset.videoModalTarget);
       const embedUrl = trigger.dataset.videoEmbedUrl;
-      const frame = modal?.querySelector('[data-video-modal-frame]');
-
-      if (!modal || !frame || !isSafeEmbedUrl(embedUrl)) {
-        return;
-      }
-
-      const iframe = document.createElement('iframe');
-      iframe.src = playbackUrl(embedUrl);
-      iframe.title = trigger.dataset.videoTitle || 'Video';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
-      frame.replaceChildren(iframe);
-      modal.hidden = false;
-      modal.querySelector('[data-video-modal-close]')?.focus();
+      openModal(modal, embedUrl, trigger.dataset.videoTitle, trigger);
     });
   });
 
@@ -72,5 +78,13 @@ export function initVideoModals() {
     }
 
     document.querySelectorAll('[data-video-modal]:not([hidden])').forEach(closeModal);
+  });
+
+  document.querySelectorAll('[data-video-modal-auto-open]').forEach((modal) => {
+    const trigger = Array.from(triggers).find((item) => item.dataset.videoModalTarget === modal.id);
+    if (trigger && !modal.dataset.videoModalAutoOpened) {
+      modal.dataset.videoModalAutoOpened = 'true';
+      openModal(modal, trigger.dataset.videoEmbedUrl, trigger.dataset.videoTitle, trigger);
+    }
   });
 }

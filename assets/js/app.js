@@ -14,3 +14,9 @@ import('./modules/video-modal.js')
   .catch(() => {
     // Video triggers remain inert if this progressive enhancement module fails.
   });
+
+import('./modules/video-inline.js')
+  .then(({ initInlineVideos }) => initInlineVideos())
+  .catch(() => {
+    // Poster and manual inline trigger remain available without observer support.
+  });

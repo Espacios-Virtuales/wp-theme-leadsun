@@ -35,6 +35,6 @@ if ( $video ) :
 			'title'      => sprintf( __( 'Reproducir video: %s', 'leadsun' ), get_the_title( $post_id ) ),
 		)
 	);
-	get_template_part( 'template-parts/components/video-modal', null, array( 'modal_id' => $modal_id, 'title' => get_the_title( $post_id ) ) );
+	get_template_part( 'template-parts/components/video-modal', null, array( 'modal_id' => $modal_id, 'title' => get_the_title( $post_id ), 'auto_open' => true ) );
 endif;
 ?>
