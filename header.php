@@ -34,10 +34,11 @@
 						'menu_id'        => 'primary-menu',
 						'menu_class'     => 'navbar-nav ms-auto',
 						'container'      => false,
-						'fallback_cb'    => 'wp_page_menu',
+						'fallback_cb'    => 'leadsun_primary_navigation_fallback',
 					)
 				);
 				?>
+				<a class="btn-leadsun leadsun-header__cta p-2" href="<?php echo esc_url( leadsun_quote_page_url() ); ?>"><?php esc_html_e( 'Cotizar proyecto', 'leadsun' ); ?></a>
 			</nav>
 		</div>
 	</header>

@@ -4,6 +4,7 @@
 @import "settings/tokens";
 @import "settings/bootstrap";
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
 
 @import "base/root";
 @import "base/typography";
@@ -18,10 +19,16 @@
 @import "components/cards";
 @import "components/forms";
 @import "components/video";
+@import "components/video-modal";
+@import "components/video-inline";
+@import "components/entity-card";
+@import "components/entity-hero";
 
 @import "pages/home";
+@import "pages/home-mockup";
 @import "pages/products";
 @import "pages/projects";
+@import "pages/entities";
 
 @import "utilities/accessibility";
 @import "utilities/helpers";
