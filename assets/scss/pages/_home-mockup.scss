@@ -49,12 +49,13 @@
 .home-contact p { color: var(--ls-text-muted); }
 .home-contact .btn-leadsun { margin-top: .5rem; }
 .home-contact__channels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 48rem; padding: 0; margin: 2.5rem auto 0; list-style: none; }
-.home-contact__channels li { display: flex; align-items: center; justify-content: center; gap: .75rem; text-align: left; }
-.home-contact__icon { display: grid; width: 2.5rem; height: 2.5rem; flex: 0 0 auto; place-items: center; color: var(--ls-white); border: 1px solid var(--ls-border-strong); border-radius: 50%; }
-.home-contact__channels strong,
-.home-contact__channels small { display: block; }
-.home-contact__channels strong { color: var(--ls-white); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
-.home-contact__channels small { color: var(--ls-text-muted); font-size: .8rem; }
+.home-contact__channel { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); align-items: center; column-gap: .75rem; text-align: left; }
+.home-contact__icon { display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; color: var(--ls-white); border: 1px solid var(--ls-border-strong); border-radius: 50%; }
+.home-contact__content { min-width: 0; text-align: left; }
+.home-contact__content strong,
+.home-contact__content small { display: block; }
+.home-contact__content strong { color: var(--ls-white); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+.home-contact__content small { color: var(--ls-text-muted); font-size: .8rem; overflow-wrap: anywhere; }
 
 @media (max-width: 991.98px) {
   .home-hero { min-height: 44rem; }
@@ -65,11 +66,14 @@
   .home-certifications ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+@media (max-width: 767.98px) {
+  .home-contact__channels { grid-template-columns: 1fr; width: min(100%, 22rem); }
+}
+
 @media (max-width: 575.98px) {
   .home-hero { min-height: 39rem; }
   .home-hero__overlay { background: linear-gradient(0deg, rgba(5, 6, 7, .96), rgba(5, 6, 7, .38)); }
   .home-solutions__grid,
-  .home-certifications ul,
-  .home-contact__channels { grid-template-columns: 1fr; }
+  .home-certifications ul { grid-template-columns: 1fr; }
   .home-section__heading { align-items: start; flex-direction: column; }
 }
