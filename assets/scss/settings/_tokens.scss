@@ -1,6 +1,29 @@
-// Neutral baseline only. Replace with the approved LEADSUN visual tokens during implementation.
 $leadsun-font-family-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 $leadsun-content-max-width: 1320px;
-$leadsun-radius-sm: 0.25rem;
-$leadsun-radius-md: 0.5rem;
+$leadsun-radius-sm: 4px;
+$leadsun-radius-md: 6px;
+$leadsun-radius-lg: 8px;
 $leadsun-transition: 180ms ease;
+$leadsun-section-space: clamp(4rem, 7vw, 7rem);
+$leadsun-shadow-sm: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
+
+:root {
+  --ls-red: #e21b23;
+  --ls-red-hover: #c9181f;
+  --ls-black: #050607;
+  --ls-bg: #070a0d;
+  --ls-surface: #0d1217;
+  --ls-surface-elevated: #121a22;
+  --ls-border: rgba(255, 255, 255, 0.14);
+  --ls-border-strong: rgba(255, 255, 255, 0.24);
+  --ls-white: #ffffff;
+  --ls-text: #f4f6f8;
+  --ls-text-muted: #aab2ba;
+  --ls-radius-sm: #{$leadsun-radius-sm};
+  --ls-radius-md: #{$leadsun-radius-md};
+  --ls-radius-lg: #{$leadsun-radius-lg};
+  --ls-shadow-sm: #{$leadsun-shadow-sm};
+  --ls-transition: #{$leadsun-transition};
+  --ls-section-space: #{$leadsun-section-space};
+  --ls-content-max-width: #{$leadsun-content-max-width};
+}

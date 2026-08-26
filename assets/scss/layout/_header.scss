@@ -1,6 +1,8 @@
 .site-header {
   position: relative;
   z-index: 20;
+  border-bottom: 1px solid var(--ls-border);
+  background: rgba(5, 6, 7, 0.94);
 }
 
 .leadsun-header__inner {
@@ -8,5 +10,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  min-height: 4.5rem;
+  min-height: 5rem;
 }
+
+.site-branding { min-width: 0; }
+
+.custom-logo-link,
+.custom-logo { display: block; max-width: 10rem; height: auto; }

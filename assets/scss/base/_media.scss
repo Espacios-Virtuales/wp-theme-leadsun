@@ -7,3 +7,23 @@ iframe {
 img {
   height: auto;
 }
+
+.leadsun-media,
+.leadsun-video {
+  position: relative;
+  overflow: hidden;
+  background: var(--ls-black);
+}
+
+.leadsun-media { aspect-ratio: 16 / 10; }
+
+.leadsun-media > img,
+.leadsun-media > video,
+.leadsun-media > iframe,
+.leadsun-video > video,
+.leadsun-video > iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

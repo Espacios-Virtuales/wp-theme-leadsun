@@ -1,1 +1,37 @@
-// Client-specific button language is deferred to visual implementation.
+.btn-leadsun,
+.btn-leadsun-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--ls-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color var(--ls-transition), border-color var(--ls-transition), color var(--ls-transition), transform var(--ls-transition);
+}
+
+.btn-leadsun { border-color: var(--ls-red); background: var(--ls-red); color: var(--ls-white); }
+
+.btn-leadsun:hover,
+.btn-leadsun:focus-visible { border-color: var(--ls-red-hover); background: var(--ls-red-hover); color: var(--ls-white); transform: translateY(-1px); }
+
+.btn-leadsun-outline { border-color: var(--ls-border-strong); background: transparent; color: var(--ls-white); }
+
+.btn-leadsun-outline:hover,
+.btn-leadsun-outline:focus-visible { border-color: var(--ls-white); background: var(--ls-white); color: var(--ls-black); }
+
+.btn-leadsun:active,
+.btn-leadsun-outline:active { transform: translateY(0); }
+
+.btn-leadsun:disabled,
+.btn-leadsun-outline:disabled,
+.btn-leadsun.is-disabled,
+.btn-leadsun-outline.is-disabled { pointer-events: none; opacity: 0.45; }
+
+:where(a, button, input, select, textarea):focus-visible { outline: 2px solid var(--ls-red); outline-offset: 3px; }

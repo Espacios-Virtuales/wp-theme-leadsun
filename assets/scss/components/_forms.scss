@@ -1,0 +1,32 @@
+.leadsun-form { display: grid; gap: 1.25rem; }
+.leadsun-field { display: grid; gap: 0.5rem; }
+
+.leadsun-form input,
+.leadsun-form select,
+.leadsun-form textarea {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--ls-border);
+  border-radius: var(--ls-radius-sm);
+  background: var(--ls-surface);
+  color: var(--ls-text);
+  line-height: 1.5;
+  transition: border-color var(--ls-transition), background-color var(--ls-transition);
+}
+
+.leadsun-form textarea { min-height: 9rem; resize: vertical; }
+.leadsun-form input::placeholder,
+.leadsun-form textarea::placeholder { color: var(--ls-text-muted); }
+.leadsun-form input:hover,
+.leadsun-form select:hover,
+.leadsun-form textarea:hover { border-color: var(--ls-border-strong); }
+.leadsun-form input:focus,
+.leadsun-form select:focus,
+.leadsun-form textarea:focus { border-color: var(--ls-red); background: var(--ls-surface-elevated); }
+.leadsun-form input[type="checkbox"],
+.leadsun-form input[type="radio"] { width: 1rem; accent-color: var(--ls-red); }
+.leadsun-form__help { margin: 0; color: var(--ls-text-muted); font-size: 0.8rem; }
+.leadsun-field--error input,
+.leadsun-field--error select,
+.leadsun-field--error textarea { border-color: var(--ls-red); }
+.leadsun-field__error { margin: 0; color: #ff777c; font-size: 0.8rem; }
