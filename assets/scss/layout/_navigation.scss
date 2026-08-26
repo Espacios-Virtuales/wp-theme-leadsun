@@ -4,32 +4,9 @@
   list-style: none;
 }
 
-.main-navigation .nav-link,
-.main-navigation a {
-  display: inline-flex;
-  padding: 0.65rem 0;
-  color: var(--ls-text);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  text-decoration: none;
-  text-transform: uppercase;
+.main-navigation:not(.is-open) {
+  display: none;
 }
-
-.main-navigation .current-menu-item > a,
-.main-navigation .current-menu-ancestor > a,
-.main-navigation a:hover { color: var(--ls-red); }
-
-.main-navigation .sub-menu {
-  display: grid;
-  gap: 0.25rem;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--ls-border);
-  background: var(--ls-surface-elevated);
-}
-
-.navbar-toggler { border-color: var(--ls-border-strong); }
-.navbar-toggler-icon { filter: invert(1); }
 
 @media (min-width: 992px) {
   .main-navigation > div > ul,
