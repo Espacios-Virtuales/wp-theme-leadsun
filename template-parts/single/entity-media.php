@@ -1,29 +1,50 @@
 <?php
 /**
- * Render one media surface for an entity: a validated video or a static image.
+ * Render direct video or featured image beside a static entity gallery.
  *
  * @package Leadsun
  */
 
-$config    = $args['config'] ?? array();
-$post_id   = $args['post_id'] ?? 0;
-$poster_url = leadsun_entity_poster_url( $post_id, $config['secondary_field'] ?? '' );
-$video      = leadsun_youtube_video( leadsun_field( $config['video_field'] ?? '', $post_id ) );
+$config       = $args['config'] ?? array();
+$post_id      = absint( $args['post_id'] ?? 0 );
+$video_field  = $config['video_field'] ?? '';
+$video        = $video_field ? leadsun_youtube_video( leadsun_field( $video_field, $post_id ) ) : null;
+$featured_id  = absint( get_post_thumbnail_id( $post_id ) );
+$gallery_ids  = array();
+$gallery_fields = $config['gallery_fields'] ?? array( $config['secondary_field'] ?? '' );
 
-if ( $video ) :
-	$modal_id = leadsun_video_modal_id();
-	get_template_part(
-		'template-parts/components/video-trigger',
-		null,
-		array(
-			'video'      => $video,
-			'modal_id'   => $modal_id,
-			'poster_url' => $poster_url,
-			'title'      => sprintf( __( 'Reproducir video: %s', 'leadsun' ), get_the_title( $post_id ) ),
-		)
-	);
-	get_template_part( 'template-parts/components/video-modal', null, array( 'modal_id' => $modal_id, 'title' => get_the_title( $post_id ), 'auto_open' => true ) );
-else :
-	?>
-	<figure class="entity-media"><img src="<?php echo esc_url( $poster_url ); ?>" alt=""></figure>
-<?php endif; ?>
+foreach ( $gallery_fields as $field_name ) {
+	if ( ! $field_name ) {
+		continue;
+	}
+
+	$image = leadsun_field( $field_name, $post_id );
+	$image = is_array( $image ) ? absint( $image['ID'] ?? $image['id'] ?? 0 ) : absint( $image );
+	if ( $image ) {
+		$gallery_ids[] = $image;
+	}
+}
+
+$gallery_ids = array_slice( array_values( array_unique( array_diff( $gallery_ids, array( $featured_id ) ) ) ), 0, 3 );
+$has_primary = $video || $featured_id;
+$layout_class = $has_primary ? ( $gallery_ids ? ' entity-media-layout--has-primary' : ' entity-media-layout--primary-only' ) : ' entity-media-layout--gallery-only';
+
+if ( ! $has_primary && ! $gallery_ids ) {
+	return;
+}
+?>
+<section class="entity-media-layout<?php echo esc_attr( $layout_class ); ?>" aria-label="<?php esc_attr_e( 'Contenido multimedia', 'leadsun' ); ?>">
+	<?php if ( $has_primary ) : ?>
+		<div class="entity-media-layout__primary">
+			<?php if ( $video ) : ?>
+				<?php get_template_part( 'template-parts/components/video-responsive', null, array( 'video' => $video, 'title' => sprintf( __( 'Video de %s', 'leadsun' ), get_the_title( $post_id ) ) ) ); ?>
+			<?php else : ?>
+				<figure class="entity-media"><?php echo wp_get_attachment_image( $featured_id, 'large', false, array( 'decoding' => 'async' ) ); ?></figure>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $gallery_ids ) : ?>
+		<?php get_template_part( 'template-parts/components/entity-gallery', null, array( 'image_ids' => $gallery_ids ) ); ?>
+	<?php endif; ?>
+</section>

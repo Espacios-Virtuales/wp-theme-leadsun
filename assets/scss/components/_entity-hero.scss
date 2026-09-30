@@ -16,4 +16,8 @@
 .entity-hero__excerpt { max-width: 56ch; margin: 0; color: var(--ls-text); font-size: clamp(1.05rem, 1rem + .4vw, 1.3rem); }
 .entity-hero--compact { min-height: clamp(15rem, 25vw, 21rem); }
 
-@media (max-width: 575.98px) { .entity-hero { min-height: 22rem; } .entity-hero__overlay { background: linear-gradient(0deg, rgba(5, 6, 7, .95), rgba(5, 6, 7, .52)); } }
+@media (max-width: 575.98px) {
+  .entity-hero { min-height: 22rem; }
+  .entity-hero--compact { min-height: 12rem; }
+  .entity-hero__overlay { background: linear-gradient(0deg, rgba(5, 6, 7, .95), rgba(5, 6, 7, .52)); }
+}

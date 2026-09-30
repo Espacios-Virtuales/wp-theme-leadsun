@@ -27,6 +27,26 @@
             "library": "all"
         },
         {
+            "key": "field_leadsun_project_secondary_image_2",
+            "label": "Imagen secundaria 2",
+            "name": "project_secondary_image_2",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_leadsun_project_secondary_image_3",
+            "label": "Imagen secundaria 3",
+            "name": "project_secondary_image_3",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
             "key": "field_leadsun_project_youtube_url",
             "label": "URL de YouTube",
             "name": "project_youtube_url",
