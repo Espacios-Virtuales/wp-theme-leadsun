@@ -48,12 +48,10 @@ npm run build
 
 ### CPT
 
-- `leadsun_product` → `/productos/`
 - `leadsun_project` → `/proyectos/`
 
 ### Taxonomías
 
-- `leadsun_line` → líneas de producto
 - `leadsun_sector` → sectores de proyecto
 
 ## ACF Free
