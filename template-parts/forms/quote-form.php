@@ -9,6 +9,17 @@ $state            = leadsun_form_submission_state( 'quote' );
 $product_options  = leadsun_quote_product_options();
 $project_types    = array( 'Vial', 'Urbano', 'Industrial', 'Portuario', 'Rural', 'Espacio público', 'Otro' );
 $project_stages   = array( 'Evaluación', 'Diseño / especificación', 'Cotización', 'Licitación', 'Ejecución', 'Otro' );
+$interest         = ! empty( $state['data']['interest_type'] )
+	? array(
+		'type' => (string) $state['data']['interest_type'],
+		'id'   => absint( $state['data']['interest_id'] ?? 0 ),
+		'name' => (string) $state['data']['interest_name'],
+	)
+	: leadsun_quote_interest_from_query( wp_unslash( $_GET ) );
+$interest_labels  = array(
+	'solution'   => __( 'Solución', 'leadsun' ),
+	'technology' => __( 'Tecnología', 'leadsun' ),
+);
 ?>
 <section id="cotizacion-form" class="leadsun-form-section leadsun-section" aria-labelledby="quote-form-title">
 	<div class="leadsun-container leadsun-form-section__inner">
@@ -18,6 +29,9 @@ $project_stages   = array( 'Evaluación', 'Diseño / especificación', 'Cotizaci
 			<input type="hidden" name="leadsun_form_type" value="quote">
 			<?php wp_nonce_field( 'leadsun_quote_submit', 'leadsun_quote_nonce' ); ?>
 			<div class="leadsun-form__honeypot" aria-hidden="true"><label for="quote-website">Website</label><input id="quote-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+			<input type="hidden" name="interest_type" value="<?php echo esc_attr( $interest['type'] ); ?>">
+			<input type="hidden" name="interest_name" value="<?php echo esc_attr( $interest['name'] ); ?>">
+			<?php if ( 'solution' !== $interest['type'] ) : ?><input type="hidden" name="interest_id" value="<?php echo esc_attr( $interest['id'] ); ?>"><?php endif; ?>
 			<div class="leadsun-form__grid">
 				<?php
 				$fields = array(
@@ -36,7 +50,11 @@ $project_stages   = array( 'Evaluación', 'Diseño / especificación', 'Cotizaci
 					<div class="leadsun-field<?php echo $error ? ' leadsun-field--error' : ''; ?>"><label for="<?php echo esc_attr( str_replace( '_', '-', $name ) ); ?>"><?php echo esc_html( $field[0] ); ?><?php echo $field[3] ? ' *' : ''; ?></label><input id="<?php echo esc_attr( str_replace( '_', '-', $name ) ); ?>" name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $field[1] ); ?>" autocomplete="<?php echo esc_attr( $field[4] ); ?>"<?php echo 'quote_quantity' === $name ? ' min="1" step="1"' : ''; ?><?php echo $field[3] ? ' required' : ''; ?> value="<?php echo leadsun_form_value( $state, $field[2] ); ?>" aria-invalid="<?php echo $error ? 'true' : 'false'; ?>" aria-describedby="<?php echo esc_attr( $name ); ?>-error"><?php leadsun_form_field_error( $state, $name ); ?></div>
 				<?php endforeach; ?>
 				<div class="leadsun-field<?php echo ! empty( $state['errors']['quote_project_type'] ) ? ' leadsun-field--error' : ''; ?>"><label for="quote-project-type"><?php esc_html_e( 'Tipo de proyecto', 'leadsun' ); ?> *</label><select id="quote-project-type" name="quote_project_type" required aria-invalid="<?php echo ! empty( $state['errors']['quote_project_type'] ) ? 'true' : 'false'; ?>" aria-describedby="quote_project_type-error"><option value=""><?php esc_html_e( 'Selecciona una opción', 'leadsun' ); ?></option><?php foreach ( $project_types as $type ) : ?><option value="<?php echo esc_attr( $type ); ?>"<?php selected( $state['data']['project_type'] ?? '', $type ); ?>><?php echo esc_html( $type ); ?></option><?php endforeach; ?></select><?php leadsun_form_field_error( $state, 'quote_project_type' ); ?></div>
-				<div class="leadsun-field"><label for="quote-product-interest"><?php esc_html_e( 'Producto de interés', 'leadsun' ); ?></label><select id="quote-product-interest" name="quote_product_interest"><option value=""><?php esc_html_e( 'Por definir', 'leadsun' ); ?></option><?php foreach ( $product_options as $id => $title ) : ?><option value="<?php echo esc_attr( $id ); ?>"<?php selected( $state['data']['product_interest'] ?? '', $id ); ?>><?php echo esc_html( $title ); ?></option><?php endforeach; ?></select></div>
+				<?php if ( $interest['id'] && isset( $interest_labels[ $interest['type'] ] ) ) : ?>
+					<div class="leadsun-field leadsun-field--context"><span class="leadsun-field__label"><?php esc_html_e( 'Tipo', 'leadsun' ); ?></span><p><?php echo esc_html( $interest_labels[ $interest['type'] ] ); ?></p><span class="leadsun-field__label"><?php esc_html_e( 'Selección', 'leadsun' ); ?></span><?php if ( 'solution' === $interest['type'] ) : ?><label class="screen-reader-text" for="quote-product-interest"><?php esc_html_e( 'Selección', 'leadsun' ); ?></label><select id="quote-product-interest" name="interest_id"><?php foreach ( $product_options as $id => $title ) : ?><option value="<?php echo esc_attr( $id ); ?>"<?php selected( (string) $interest['id'], $id ); ?>><?php echo esc_html( $title ); ?></option><?php endforeach; ?></select><?php else : ?><p><?php echo esc_html( $interest['name'] ); ?></p><?php endif; ?></div>
+				<?php else : ?>
+					<div class="leadsun-field"><label for="quote-product-interest"><?php esc_html_e( 'Producto de interés', 'leadsun' ); ?></label><select id="quote-product-interest" name="quote_product_interest"><option value=""><?php esc_html_e( 'Por definir', 'leadsun' ); ?></option><?php foreach ( $product_options as $id => $title ) : ?><option value="<?php echo esc_attr( $id ); ?>"<?php selected( $state['data']['product_interest'] ?? '', $id ); ?>><?php echo esc_html( $title ); ?></option><?php endforeach; ?></select></div>
+				<?php endif; ?>
 				<div class="leadsun-field"><label for="quote-stage"><?php esc_html_e( 'Etapa actual del proyecto', 'leadsun' ); ?></label><select id="quote-stage" name="quote_stage"><option value=""><?php esc_html_e( 'Selecciona una opción', 'leadsun' ); ?></option><?php foreach ( $project_stages as $stage ) : ?><option value="<?php echo esc_attr( $stage ); ?>"<?php selected( $state['data']['stage'] ?? '', $stage ); ?>><?php echo esc_html( $stage ); ?></option><?php endforeach; ?></select></div>
 			</div>
 			<div class="leadsun-field leadsun-field--full<?php echo ! empty( $state['errors']['quote_message'] ) ? ' leadsun-field--error' : ''; ?>"><label for="quote-message"><?php esc_html_e( 'Mensaje', 'leadsun' ); ?> *</label><textarea id="quote-message" name="quote_message" required aria-invalid="<?php echo ! empty( $state['errors']['quote_message'] ) ? 'true' : 'false'; ?>" aria-describedby="quote_message-error"><?php echo esc_textarea( $state['data']['message'] ?? '' ); ?></textarea><?php leadsun_form_field_error( $state, 'quote_message' ); ?></div>
