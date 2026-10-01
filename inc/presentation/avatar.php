@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Render the launcher and the shared video modal only when configured. */
 function leadsun_render_commercial_avatar(): void {
-	if ( ! get_option( 'leadsun_avatar_enabled', false ) ) {
+	if ( ! get_option( 'leadsun_avatar_enabled', true ) ) {
 		return;
 	}
 
