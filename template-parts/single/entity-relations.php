@@ -1,20 +1,30 @@
 <?php
 /**
- * One-way project relationships.
+ * Existing project relationships for all supported entity singles.
  *
  * @package Leadsun
  */
 
-$relations = leadsun_project_relations( $args['post_id'] ?? null );
-$items     = array_filter(
-	array(
-		'solution'   => array( __( 'Solución relacionada', 'leadsun' ), $relations['solution'] ),
-		'technology' => array( __( 'Tecnología relacionada', 'leadsun' ), $relations['technology'] ),
-	),
-	static function ( array $item ): bool {
-		return $item[1] > 0;
+$post_id   = absint( $args['post_id'] ?? 0 );
+$post_type = get_post_type( $post_id );
+$items     = array();
+
+if ( 'leadsun_project' === $post_type ) {
+	$relations = leadsun_project_relations( $post_id );
+	$items     = array_filter(
+		array(
+			array( __( 'Solución relacionada', 'leadsun' ), $relations['solution'] ),
+			array( __( 'Tecnología relacionada', 'leadsun' ), $relations['technology'] ),
+		),
+		static function ( array $item ): bool {
+			return $item[1] > 0;
+		}
+	);
+} elseif ( in_array( $post_type, array( 'leadsun_solution', 'leadsun_technology' ), true ) ) {
+	foreach ( leadsun_entity_project_relations( $post_id, $post_type ) as $project_id ) {
+		$items[] = array( __( 'Proyecto relacionado', 'leadsun' ), $project_id );
 	}
-);
+}
 
 if ( ! $items ) {
 	return;

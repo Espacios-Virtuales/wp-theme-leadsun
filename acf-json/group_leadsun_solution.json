@@ -40,14 +40,14 @@
             "required": 0
         },
         {
-            "key": "field_leadsun_solution_datasheet",
+            "key": "field_leadsun_solution_specifications",
             "label": "Ficha técnica",
-            "name": "solution_datasheet",
-            "type": "file",
+            "name": "solution_specifications",
+            "type": "textarea",
             "required": 0,
-            "return_format": "id",
-            "library": "all",
-            "mime_types": "pdf"
+            "instructions": "Una especificación por línea usando:\nNombre | Valor\n\nEjemplo editorial:\nPotencia | 40 W\nTemperatura de color | 3000 K\nProtección | IP66",
+            "rows": 8,
+            "new_lines": ""
         }
     ],
     "location": [[{"param": "post_type", "operator": "==", "value": "leadsun_solution"}]],

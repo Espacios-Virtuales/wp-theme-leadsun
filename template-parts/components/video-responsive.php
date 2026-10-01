@@ -1,6 +1,6 @@
 <?php
 /**
- * Direct responsive YouTube embed without poster, modal, or autoplay.
+ * Direct responsive, muted autoplay YouTube embed without poster or modal.
  *
  * Expected $args: video (validated contract), title.
  *
@@ -12,13 +12,20 @@ if ( empty( $args['video']['embed_url'] ) ) {
 }
 
 $title = ! empty( $args['title'] ) ? $args['title'] : __( 'Video LEADSUN', 'leadsun' );
+$embed_url = add_query_arg(
+	array(
+		'autoplay'    => '1',
+		'mute'        => '1',
+		'playsinline' => '1',
+	),
+	$args['video']['embed_url']
+);
 ?>
 <div class="video-responsive">
 	<iframe
-		src="<?php echo esc_url( $args['video']['embed_url'] ); ?>"
+		src="<?php echo esc_url( $embed_url ); ?>"
 		title="<?php echo esc_attr( $title ); ?>"
-		loading="lazy"
-		allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"
+		allow="autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"
 		referrerpolicy="strict-origin-when-cross-origin"
 		allowfullscreen
 	></iframe>

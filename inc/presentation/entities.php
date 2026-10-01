@@ -23,8 +23,6 @@ function leadsun_entity_config( string $post_type ): array {
 			'secondary_field' => 'solution_secondary_image',
 			'gallery_fields'  => array( 'solution_secondary_image', 'solution_secondary_image_2', 'solution_secondary_image_3' ),
 			'video_field'     => 'solution_youtube_url',
-			'document_field'  => 'solution_datasheet',
-			'document_label'  => __( 'Descargar ficha técnica', 'leadsun' ),
 		),
 		'leadsun_technology' => array(
 			'label'           => __( 'Tecnología', 'leadsun' ),

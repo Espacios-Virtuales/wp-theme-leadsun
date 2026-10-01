@@ -13,7 +13,6 @@ $content   = trim( (string) get_post_field( 'post_content', $post_id ) );
 $excerpt_text = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( $excerpt ) ) );
 $content_text = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( $content ) ) );
 $show_content = '' !== $content_text && $content_text !== $excerpt_text;
-$document_url = leadsun_entity_document_url( $config['document_field'] ?? '', $post_id );
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'entity-single' ); ?>>
 	<?php
@@ -43,17 +42,15 @@ $document_url = leadsun_entity_document_url( $config['document_field'] ?? '', $p
 			</section>
 		<?php endif; ?>
 
-		<?php if ( $document_url && ! empty( $config['document_label'] ) ) : ?>
-			<section class="entity-single__document" aria-label="<?php esc_attr_e( 'Documento técnico', 'leadsun' ); ?>">
-				<a class="btn-leadsun-outline" href="<?php echo esc_url( $document_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $config['document_label'] ); ?></a>
-			</section>
+		<?php if ( 'leadsun_solution' === $post_type ) : ?>
+			<?php get_template_part( 'template-parts/components/entity-specifications', null, array( 'post_id' => $post_id ) ); ?>
 		<?php endif; ?>
 
 		<?php if ( 'leadsun_project' === $post_type ) : ?>
 			<?php get_template_part( 'template-parts/single/entity-meta', null, array( 'post_type' => $post_type, 'post_id' => $post_id ) ); ?>
 		<?php endif; ?>
 
-		<?php if ( 'leadsun_project' === $post_type ) : ?>
+		<?php if ( in_array( $post_type, array( 'leadsun_solution', 'leadsun_technology', 'leadsun_project' ), true ) ) : ?>
 			<?php get_template_part( 'template-parts/single/entity-relations', null, array( 'post_id' => $post_id ) ); ?>
 		<?php endif; ?>
 	</div>
