@@ -42,8 +42,11 @@ $contact_icons   = array(
 		<div class="home-hero__overlay"></div>
 		<div class="leadsun-container home-hero__content">
 			<h1><?php echo wp_kses_post( nl2br( esc_html( $hero_title ) ) ); ?></h1>
-			<p><?php echo esc_html( $hero_text ); ?></p>
-			<a class="btn-leadsun" href="#soluciones"><?php esc_html_e( 'Conoce nuestras soluciones', 'leadsun' ); ?></a>
+			<p><?php echo esc_html( wp_strip_all_tags( $hero_text ) ); ?></p>
+			<div class="home-hero__actions">
+				<a class="btn-leadsun" href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_solution' ) ); ?>"><?php esc_html_e( 'Explorar soluciones', 'leadsun' ); ?></a>
+				<a class="btn-leadsun-outline" href="<?php echo esc_url( leadsun_quote_page_url() ); ?>"><?php esc_html_e( 'Cotizar un proyecto', 'leadsun' ); ?></a>
+			</div>
 		</div>
 	</section>
 

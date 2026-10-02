@@ -48,6 +48,85 @@
             "instructions": "Una especificación por línea usando:\nNombre | Valor\n\nEjemplo editorial:\nPotencia | 40 W\nTemperatura de color | 3000 K\nProtección | IP66",
             "rows": 8,
             "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_solution_benefits",
+            "label": "Beneficios",
+            "name": "solution_benefits",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Un beneficio por línea.",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_solution_applications",
+            "label": "Aplicaciones",
+            "name": "solution_applications",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Una aplicación por línea.",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_solution_certifications",
+            "label": "Certificaciones",
+            "name": "solution_certifications",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Una certificación por línea.",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_solution_datasheet",
+            "label": "Ficha técnica PDF",
+            "name": "solution_datasheet",
+            "type": "file",
+            "required": 0,
+            "return_format": "id",
+            "library": "all",
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_leadsun_solution_highlight_title",
+            "label": "Título destacado",
+            "name": "solution_highlight_title",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_solution_highlight_text",
+            "label": "Texto destacado",
+            "name": "solution_highlight_text",
+            "type": "textarea",
+            "required": 0,
+            "rows": 4,
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_leadsun_solution_highlight_badge_title",
+            "label": "Sello destacado",
+            "name": "solution_highlight_badge_title",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_solution_highlight_badge_subtitle",
+            "label": "Bajada del sello",
+            "name": "solution_highlight_badge_subtitle",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_solution_note",
+            "label": "Nota editorial",
+            "name": "solution_note",
+            "type": "textarea",
+            "required": 0,
+            "rows": 3,
+            "new_lines": "wpautop"
         }
     ],
     "location": [[{"param": "post_type", "operator": "==", "value": "leadsun_solution"}]],

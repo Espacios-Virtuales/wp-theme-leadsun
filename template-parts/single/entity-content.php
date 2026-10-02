@@ -43,11 +43,17 @@ $show_content = '' !== $content_text && $content_text !== $excerpt_text;
 		<?php endif; ?>
 
 		<?php if ( 'leadsun_solution' === $post_type ) : ?>
+			<?php get_template_part( 'template-parts/components/solution-highlight', null, array( 'post_id' => $post_id ) ); ?>
+			<?php get_template_part( 'template-parts/components/entity-text-list', null, array( 'post_id' => $post_id, 'field' => 'solution_benefits', 'title' => __( 'Beneficios', 'leadsun' ), 'id' => 'beneficios' ) ); ?>
 			<?php get_template_part( 'template-parts/components/entity-specifications', null, array( 'post_id' => $post_id ) ); ?>
+			<?php get_template_part( 'template-parts/components/entity-text-list', null, array( 'post_id' => $post_id, 'field' => 'solution_applications', 'title' => __( 'Aplicaciones', 'leadsun' ), 'id' => 'aplicaciones' ) ); ?>
+			<?php get_template_part( 'template-parts/components/entity-text-list', null, array( 'post_id' => $post_id, 'field' => 'solution_certifications', 'title' => __( 'Certificaciones', 'leadsun' ), 'id' => 'certificaciones' ) ); ?>
+			<?php get_template_part( 'template-parts/components/solution-actions', null, array( 'post_id' => $post_id, 'config' => $config ) ); ?>
 		<?php endif; ?>
 
 		<?php if ( 'leadsun_project' === $post_type ) : ?>
 			<?php get_template_part( 'template-parts/single/entity-meta', null, array( 'post_type' => $post_type, 'post_id' => $post_id ) ); ?>
+			<?php get_template_part( 'template-parts/single/project-details', null, array( 'post_id' => $post_id ) ); ?>
 		<?php endif; ?>
 
 		<?php if ( in_array( $post_type, array( 'leadsun_solution', 'leadsun_technology', 'leadsun_project' ), true ) ) : ?>

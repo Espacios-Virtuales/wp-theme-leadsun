@@ -17,6 +17,8 @@ $embed_url = add_query_arg(
 		'autoplay'    => '1',
 		'mute'        => '1',
 		'playsinline' => '1',
+		'controls'     => '0',
+		'rel'          => '0',
 	),
 	$args['video']['embed_url']
 );

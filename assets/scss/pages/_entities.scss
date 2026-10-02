@@ -49,6 +49,26 @@
 .entity-specifications th,
 .entity-specifications td { padding: .8rem 1rem; text-align: left; border: 1px solid var(--ls-border); }
 .entity-specifications th { color: var(--ls-text); background: var(--ls-surface); }
+.entity-text-list,
+.entity-project-details,
+.solution-highlight { min-width: 0; }
+.entity-text-list h2,
+.entity-project-details h2,
+.solution-highlight h2 { margin-bottom: .75rem; font-size: var(--ls-font-size-section); text-transform: uppercase; }
+.entity-text-list ul { display: grid; gap: .65rem; padding: 0; margin: 0; list-style: none; }
+.entity-text-list li { padding-left: 1rem; color: var(--ls-text-muted); border-left: 2px solid var(--ls-red); }
+.entity-project-details dl { display: grid; gap: .75rem; margin: 0; }
+.entity-project-details dl div { display: grid; gap: .2rem; padding: .85rem 1rem; background: var(--ls-surface); border: 1px solid var(--ls-border); }
+.entity-project-details dt { color: var(--ls-text-muted); font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.entity-project-details dd { margin: 0; }
+.solution-highlight { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding: clamp(1.25rem, 3vw, 2.25rem); background: var(--ls-surface); border: 1px solid var(--ls-border-strong); }
+.solution-highlight__text p { margin-bottom: 0; color: var(--ls-text-muted); }
+.solution-highlight__note { margin-top: 1rem; color: var(--ls-text-muted); font-size: .9rem; }
+.solution-highlight__note p { margin: 0; }
+.solution-highlight__badge { display: grid; width: min(100%, 12rem); align-content: center; gap: .35rem; padding: 1rem; margin: 0; color: var(--ls-text); border: 1px solid var(--ls-red); }
+.solution-highlight__badge strong { color: var(--ls-red); font-size: 1.1rem; letter-spacing: .08em; }
+.solution-highlight__badge span { color: var(--ls-text-muted); font-size: .8rem; }
+.solution-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
 
 .entity-meta { margin: 0; color: var(--ls-red); font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .entity-relations { padding: 1.25rem; background: var(--ls-surface); border: 1px solid var(--ls-border); }
@@ -64,4 +84,6 @@
   .entity-media-layout { grid-template-columns: minmax(0, 1fr); }
   .entity-single__cta > .leadsun-container { align-items: stretch; flex-direction: column; }
   .entity-single__cta .btn-leadsun { width: 100%; }
+  .solution-highlight { grid-template-columns: 1fr; }
+  .solution-highlight__badge { width: 100%; }
 }
