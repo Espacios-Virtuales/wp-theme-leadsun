@@ -36,7 +36,23 @@ function leadsun_handle_form_submission(): void {
 		return;
 	}
 
-	if ( ! leadsun_send_form_mail( $form_type, $result['data'] ) ) {
+	$lead_id = 0;
+	if ( 'quote' === $form_type ) {
+		$lead_id = leadsun_persist_quote_lead( $result['data'] );
+		if ( is_wp_error( $lead_id ) || ! $lead_id ) {
+			$GLOBALS['leadsun_form_delivery_states'][ $form_type ] = $result;
+			$GLOBALS['leadsun_form_delivery_errors'][ $form_type ] = __( 'No fue posible guardar la solicitud en este momento. Inténtalo nuevamente o utiliza nuestros canales de contacto.', 'leadsun' );
+			return;
+		}
+		$result['data']['lead_id'] = $lead_id;
+	}
+
+	$mail_sent = leadsun_send_form_mail( $form_type, $result['data'] );
+	if ( $lead_id ) {
+		leadsun_update_quote_lead_mail_status( $lead_id, $mail_sent );
+	}
+
+	if ( ! $mail_sent ) {
 		$GLOBALS['leadsun_form_delivery_states'][ $form_type ] = $result;
 		$GLOBALS['leadsun_form_delivery_errors'][ $form_type ] = __( 'No fue posible enviar la solicitud en este momento. Inténtalo nuevamente o utiliza nuestros canales de contacto.', 'leadsun' );
 		return;
