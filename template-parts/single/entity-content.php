@@ -27,7 +27,7 @@ $show_content = '' !== $content_text && $content_text !== $excerpt_text;
 	);
 	?>
 	<?php if ( 'leadsun_solution' === $post_type ) : ?>
-		<div class="leadsun-container entity-single__identity-meta">
+		<div class="leadsun-container entity-single__identity-meta" data-aos="fade-up">
 			<?php get_template_part( 'template-parts/single/entity-meta', null, array( 'post_type' => $post_type, 'post_id' => $post_id ) ); ?>
 		</div>
 	<?php endif; ?>
@@ -35,7 +35,7 @@ $show_content = '' !== $content_text && $content_text !== $excerpt_text;
 		<?php get_template_part( 'template-parts/single/entity-media', null, array( 'config' => $config, 'post_id' => $post_id ) ); ?>
 
 		<?php if ( $excerpt || $show_content ) : ?>
-			<section class="entity-single__description" aria-labelledby="entity-description-title">
+			<section class="entity-single__description" aria-labelledby="entity-description-title" data-aos="fade-up">
 				<h2 id="entity-description-title"><?php esc_html_e( 'Descripción', 'leadsun' ); ?></h2>
 				<?php if ( $excerpt ) : ?><p class="entity-single__excerpt"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 				<?php if ( $show_content ) : ?><div class="entity-single__content entry-content"><?php echo apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div><?php endif; ?>

@@ -34,7 +34,7 @@ if ( ! $has_primary && ! $gallery_ids ) {
 	$layout_class = ' entity-media-layout--primary-only';
 }
 ?>
-<section class="entity-media-layout<?php echo esc_attr( $layout_class ); ?>" aria-label="<?php esc_attr_e( 'Contenido multimedia', 'leadsun' ); ?>">
+<section class="entity-media-layout<?php echo esc_attr( $layout_class ); ?>" aria-label="<?php esc_attr_e( 'Contenido multimedia', 'leadsun' ); ?>" data-aos="fade-up">
 	<?php if ( $has_primary ) : ?>
 		<div class="entity-media-layout__primary">
 			<?php if ( $video ) : ?>

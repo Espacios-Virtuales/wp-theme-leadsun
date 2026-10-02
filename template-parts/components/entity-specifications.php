@@ -32,7 +32,7 @@ if ( ! $rows ) {
 	return;
 }
 ?>
-<section class="entity-specifications" aria-labelledby="entity-specifications-title">
+<section class="entity-specifications" aria-labelledby="entity-specifications-title" data-aos="fade-up">
 	<h2 id="entity-specifications-title"><?php esc_html_e( 'Ficha técnica', 'leadsun' ); ?></h2>
 	<div class="entity-specifications__table-wrap">
 		<table>

@@ -15,7 +15,7 @@ if ( ! $post_id || ! in_array( $context, array( 'solucion', 'tecnologia' ), true
 }
 ?>
 <footer class="entity-single__cta">
-	<div class="leadsun-container">
+	<div class="leadsun-container" data-aos="fade-up">
 		<h2><?php esc_html_e( '¿Tienes un proyecto en mente?', 'leadsun' ); ?></h2>
 		<a class="btn-leadsun" href="<?php echo esc_url( add_query_arg( $context, $post_id, home_url( '/cotizar-proyecto/' ) ) ); ?>"><?php esc_html_e( 'Cotiza tu proyecto', 'leadsun' ); ?></a>
 	</div>

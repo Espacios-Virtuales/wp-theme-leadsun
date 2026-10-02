@@ -9,8 +9,8 @@ $state = leadsun_form_submission_state( 'contact' );
 ?>
 <section id="contacto-form" class="leadsun-form-section leadsun-section" aria-labelledby="contact-form-title">
 	<div class="leadsun-container leadsun-form-section__inner">
-		<h2 id="contact-form-title"><?php esc_html_e( 'Envíanos tu consulta', 'leadsun' ); ?></h2>
-		<form class="leadsun-form leadsun-form--contact" method="post" novalidate>
+		<h2 id="contact-form-title" data-aos="fade-up"><?php esc_html_e( 'Envíanos tu consulta', 'leadsun' ); ?></h2>
+		<form class="leadsun-form leadsun-form--contact" method="post" novalidate data-aos="fade-up">
 			<?php leadsun_form_feedback( $state ); ?>
 			<input type="hidden" name="leadsun_form_type" value="contact">
 			<?php wp_nonce_field( 'leadsun_contact_submit', 'leadsun_contact_nonce' ); ?>

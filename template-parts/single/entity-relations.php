@@ -30,7 +30,7 @@ if ( ! $items ) {
 	return;
 }
 ?>
-<section class="entity-relations" aria-labelledby="entity-relations-title">
+<section class="entity-relations" aria-labelledby="entity-relations-title" data-aos="fade-up">
 	<h2 id="entity-relations-title"><?php esc_html_e( 'Relaciones', 'leadsun' ); ?></h2>
 	<ul>
 		<?php foreach ( $items as $item ) : ?>

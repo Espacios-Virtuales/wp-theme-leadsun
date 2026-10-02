@@ -31,7 +31,7 @@ get_header();
 		?>
 
 		<section class="leadsun-landing__content leadsun-section">
-			<div class="leadsun-container entry-content">
+			<div class="leadsun-container entry-content" data-aos="fade-up">
 				<?php the_content(); ?>
 			</div>
 		</section>
