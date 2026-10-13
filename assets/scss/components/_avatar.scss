@@ -39,6 +39,11 @@
 .leadsun-avatar__label { overflow: hidden; font-size: .8rem; font-weight: 750; line-height: 1.2; text-overflow: ellipsis; }
 .leadsun-avatar__launcher:focus-visible { outline: 3px solid var(--ls-white); outline-offset: 3px; }
 
+.leadsun-avatar[data-form-visible],
+.leadsun-whatsapp-float[data-form-visible],
+.leadsun-avatar[data-content-obscured],
+.leadsun-whatsapp-float[data-content-obscured] { visibility: hidden; pointer-events: none; }
+
 @media (max-width: 575.98px) {
   .leadsun-avatar { right: max(.75rem, env(safe-area-inset-right)); }
   .leadsun-avatar__launcher { max-width: min(11.5rem, calc(100vw - 1.5rem)); min-height: 2.85rem; gap: .5rem; padding-right: .7rem; }

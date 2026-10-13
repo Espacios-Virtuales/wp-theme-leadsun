@@ -19,7 +19,7 @@ function leadsun_entity_config( string $post_type ): array {
 		'leadsun_solution' => array(
 			'label'           => __( 'Solución', 'leadsun' ),
 			'plural'          => __( 'Soluciones', 'leadsun' ),
-			'introduction'    => __( 'Una selección navegable de soluciones LEADSUN. El contenido final será incorporado cuando esté disponible.', 'leadsun' ),
+			'introduction'    => '',
 			'secondary_field' => 'solution_secondary_image',
 			'gallery_fields'  => array( 'solution_secondary_image', 'solution_secondary_image_2', 'solution_secondary_image_3' ),
 			'video_field'     => 'solution_youtube_url',

@@ -34,7 +34,7 @@ $is_solution_archive = 'leadsun_solution' === $post_type;
 				</div>
 				<?php the_posts_navigation(); ?>
 			<?php else : ?>
-				<p class="entity-empty" data-aos="fade-up"><?php esc_html_e( 'Aún no hay registros disponibles. Esta vista está preparada para el contenido administrable.', 'leadsun' ); ?></p>
+				<p class="entity-empty" data-aos="fade-up"><?php esc_html_e( 'Aún no hay registros publicados.', 'leadsun' ); ?></p>
 			<?php endif; ?>
 		</div>
 	</section>
