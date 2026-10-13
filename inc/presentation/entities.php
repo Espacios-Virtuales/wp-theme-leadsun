@@ -72,3 +72,34 @@ function leadsun_entity_document_url( string $field_name, int $post_id ): string
 
 	return is_string( $value ) ? $value : '';
 }
+
+/**
+ * Parse line-based specification data using a pipe or tab separator.
+ *
+ * @param mixed $value Raw textarea value.
+ * @return array<int, array{0: string, 1: string}>
+ */
+function leadsun_parse_specification_rows( $value ): array {
+	if ( ! is_string( $value ) ) {
+		return array();
+	}
+
+	$rows = array();
+
+	foreach ( preg_split( '/\R/u', $value ) ?: array() as $line ) {
+		$parts = preg_split( '/\s*(?:\||\t)\s*/u', $line, 2 );
+
+		if ( ! is_array( $parts ) || 2 !== count( $parts ) ) {
+			continue;
+		}
+
+		$label = trim( $parts[0] );
+		$item_value = trim( $parts[1] );
+
+		if ( '' !== $label && '' !== $item_value ) {
+			$rows[] = array( $label, $item_value );
+		}
+	}
+
+	return $rows;
+}

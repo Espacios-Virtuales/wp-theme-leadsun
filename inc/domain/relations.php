@@ -68,3 +68,29 @@ function leadsun_entity_project_relations( int $entity_id, string $post_type ): 
 		)
 	);
 }
+
+/**
+ * Find published solutions explicitly paired with a technology by published projects.
+ *
+ * The existing project fields remain the single source of truth. No inverse or
+ * parallel relationship metadata is created on technologies or solutions.
+ *
+ * @return int[]
+ */
+function leadsun_technology_solution_relations( int $technology_id ): array {
+	if ( $technology_id <= 0 || 'leadsun_technology' !== get_post_type( $technology_id ) ) {
+		return array();
+	}
+
+	$solution_ids = array();
+
+	foreach ( leadsun_entity_project_relations( $technology_id, 'leadsun_technology' ) as $project_id ) {
+		$solution_id = leadsun_project_relations( $project_id )['solution'];
+
+		if ( $solution_id > 0 && 'leadsun_solution' === get_post_type( $solution_id ) && 'publish' === get_post_status( $solution_id ) ) {
+			$solution_ids[] = $solution_id;
+		}
+	}
+
+	return array_values( array_unique( $solution_ids ) );
+}
