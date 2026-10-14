@@ -81,8 +81,8 @@ $technology_meta = $is_technology ? array_filter(
 		<?php endif; ?>
 	</div>
 
-	<?php if ( 'leadsun_solution' === $post_type || 'leadsun_technology' === $post_type ) : ?>
-		<?php $quote_context = 'leadsun_solution' === $post_type ? 'solucion' : 'tecnologia'; ?>
+	<?php if ( in_array( $post_type, array( 'leadsun_solution', 'leadsun_technology', 'leadsun_project' ), true ) ) : ?>
+		<?php $quote_context = 'leadsun_solution' === $post_type ? 'solucion' : ( 'leadsun_technology' === $post_type ? 'tecnologia' : 'proyecto' ); ?>
 		<?php get_template_part( 'template-parts/components/entity-quote-cta', null, array( 'context' => $quote_context, 'post_id' => $post_id ) ); ?>
 	<?php endif; ?>
 </article>

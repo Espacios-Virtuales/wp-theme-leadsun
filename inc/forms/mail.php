@@ -103,6 +103,7 @@ function leadsun_form_mail_body( string $form_type, array $data ): string {
 	$interest_labels = array(
 		'solution'   => __( 'Solución', 'leadsun' ),
 		'technology' => __( 'Tecnología', 'leadsun' ),
+		'project'    => __( 'Proyecto de referencia', 'leadsun' ),
 	);
 	$interest = leadsun_quote_interest_from_entity(
 		sanitize_key( (string) ( $data['interest_type'] ?? '' ) ),

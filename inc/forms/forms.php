@@ -118,6 +118,7 @@ function leadsun_quote_interest_from_entity( string $type, string $raw_id ): arr
 	$entity_types = array(
 		'solution'   => 'leadsun_solution',
 		'technology' => 'leadsun_technology',
+		'project'    => 'leadsun_project',
 	);
 
 	if ( ! isset( $entity_types[ $type ] ) || ! preg_match( '/^[1-9][0-9]*$/D', $raw_id ) ) {
@@ -142,16 +143,26 @@ function leadsun_quote_interest_from_entity( string $type, string $raw_id ): arr
  * @return array{type: string, id: int, name: string}
  */
 function leadsun_quote_interest_from_query( array $query ): array {
-	$has_solution   = array_key_exists( 'solucion', $query );
-	$has_technology = array_key_exists( 'tecnologia', $query );
+	$contexts = array(
+		'solution'   => 'solucion',
+		'technology' => 'tecnologia',
+		'project'    => 'proyecto',
+	);
+	$present  = array_filter(
+		$contexts,
+		static function ( string $query_key ) use ( $query ): bool {
+			return array_key_exists( $query_key, $query );
+		}
+	);
 
-	if ( $has_solution === $has_technology ) {
+	if ( 1 !== count( $present ) ) {
 		return leadsun_quote_empty_interest();
 	}
 
-	return $has_solution
-		? leadsun_quote_interest_from_entity( 'solution', leadsun_form_request_value( $query, 'solucion' ) )
-		: leadsun_quote_interest_from_entity( 'technology', leadsun_form_request_value( $query, 'tecnologia' ) );
+	$type      = (string) array_key_first( $present );
+	$query_key = $contexts[ $type ];
+
+	return leadsun_quote_interest_from_entity( $type, leadsun_form_request_value( $query, $query_key ) );
 }
 
 /**
