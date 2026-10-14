@@ -34,3 +34,7 @@
 .leadsun-card__meta,
 .leadsun-card__action { color: var(--ls-text-muted); }
 .leadsun-card__action { margin-top: auto; color: var(--ls-red); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+
+@media (max-width: 575.98px) {
+  .leadsun-card__body { text-align: center; }
+}

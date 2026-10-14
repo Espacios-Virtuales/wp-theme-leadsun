@@ -36,4 +36,8 @@
 .entity-card__link:focus-visible { outline: 3px solid var(--ls-white); outline-offset: -5px; }
 
 @media (max-width: 991.98px) { .entity-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 575.98px) { .entity-grid { grid-template-columns: 1fr; } }
+@media (max-width: 575.98px) {
+  .entity-grid { grid-template-columns: 1fr; }
+  .entity-card__body { text-align: center; }
+  .entity-card__action { align-self: center; }
+}
