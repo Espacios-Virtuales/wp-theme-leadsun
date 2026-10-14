@@ -71,6 +71,20 @@
 .solution-highlight__badge span { color: var(--ls-text-muted); font-size: .8rem; }
 .solution-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
 
+.technology-principle,
+.technology-notes { min-width: 0; padding: clamp(1.25rem, 3vw, 2.25rem); background: var(--ls-surface); border: 1px solid var(--ls-border-strong); }
+.technology-principle { border-left: 4px solid var(--ls-red); }
+.technology-principle__eyebrow { margin: 0 0 .5rem; color: var(--ls-red); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.technology-principle h2,
+.technology-notes > h2 { margin-bottom: .75rem; font-size: var(--ls-font-size-section); text-transform: uppercase; }
+.technology-principle__text,
+.technology-notes__item { max-width: 72ch; color: var(--ls-text-muted); }
+.technology-principle__text > :last-child,
+.technology-notes__item > :last-child { margin-bottom: 0; }
+.technology-notes { display: grid; gap: 1rem; }
+.technology-notes > h2 { margin-bottom: 0; }
+.technology-notes__item h3 { margin-bottom: .4rem; color: var(--ls-text); font-size: 1rem; }
+
 .entity-meta { margin: 0; color: var(--ls-red); font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .entity-relations { padding: 1.25rem; background: var(--ls-surface); border: 1px solid var(--ls-border); }
 .entity-relations h2 { font-size: 1.25rem; }

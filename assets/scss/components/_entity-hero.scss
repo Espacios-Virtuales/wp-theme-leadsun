@@ -13,6 +13,7 @@
 .entity-hero__overlay { background: linear-gradient(90deg, rgba(5, 6, 7, .92), rgba(5, 6, 7, .42)); }
 .entity-hero__content { align-self: end; padding-block: clamp(2rem, 3.5vw, 2.75rem); }
 .entity-hero__content h1 { max-width: 14ch; margin-bottom: .3em; }
+.entity-hero__meta { margin: 0 0 .75rem; color: var(--ls-red); font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .entity-hero__excerpt { max-width: 56ch; margin: 0; color: var(--ls-text); font-size: clamp(1.05rem, 1rem + .4vw, 1.3rem); }
 .entity-hero--compact .entity-hero__content { padding-block: clamp(1.5rem, 2.5vw, 2.125rem); }
 

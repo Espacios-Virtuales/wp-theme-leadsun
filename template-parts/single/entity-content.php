@@ -13,6 +13,13 @@ $content   = trim( (string) get_post_field( 'post_content', $post_id ) );
 $excerpt_text = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( $excerpt ) ) );
 $content_text = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( $content ) ) );
 $show_content = '' !== $content_text && $content_text !== $excerpt_text;
+$is_technology = 'leadsun_technology' === $post_type;
+$technology_meta = $is_technology ? array_filter(
+	array(
+		sanitize_text_field( (string) leadsun_field( 'technology_technical_name', $post_id ) ),
+		sanitize_text_field( (string) leadsun_field( 'technology_category_label', $post_id ) ),
+	)
+) : array();
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'entity-single' ); ?>>
 	<?php
@@ -22,6 +29,8 @@ $show_content = '' !== $content_text && $content_text !== $excerpt_text;
 		array(
 			'eyebrow' => $config['label'] ?? '',
 			'title'   => get_the_title(),
+			'excerpt' => $is_technology ? $excerpt_text : '',
+			'meta'    => $technology_meta,
 			'compact' => true,
 		)
 	);
@@ -34,12 +43,19 @@ $show_content = '' !== $content_text && $content_text !== $excerpt_text;
 	<div class="leadsun-container entity-single__layout">
 		<?php get_template_part( 'template-parts/single/entity-media', null, array( 'config' => $config, 'post_id' => $post_id ) ); ?>
 
-		<?php if ( $excerpt || $show_content ) : ?>
+		<?php if ( ( ! $is_technology && $excerpt ) || $show_content ) : ?>
 			<section class="entity-single__description" aria-labelledby="entity-description-title" data-aos="fade-up">
-				<h2 id="entity-description-title"><?php esc_html_e( 'Descripción', 'leadsun' ); ?></h2>
-				<?php if ( $excerpt ) : ?><p class="entity-single__excerpt"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
+				<h2 id="entity-description-title"><?php $is_technology ? esc_html_e( 'Descripción técnica', 'leadsun' ) : esc_html_e( 'Descripción', 'leadsun' ); ?></h2>
+				<?php if ( ! $is_technology && $excerpt ) : ?><p class="entity-single__excerpt"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 				<?php if ( $show_content ) : ?><div class="entity-single__content entry-content"><?php echo apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div><?php endif; ?>
 			</section>
+		<?php endif; ?>
+
+		<?php if ( $is_technology ) : ?>
+			<?php get_template_part( 'template-parts/components/technology-principle', null, array( 'post_id' => $post_id ) ); ?>
+			<?php get_template_part( 'template-parts/components/entity-text-list', null, array( 'post_id' => $post_id, 'field' => 'technology_features', 'title' => __( 'Características de la tecnología', 'leadsun' ), 'id' => 'caracteristicas-tecnologia' ) ); ?>
+			<?php get_template_part( 'template-parts/components/entity-specifications', null, array( 'post_id' => $post_id, 'field' => 'technology_specifications', 'title' => __( 'Atributos técnicos de la tecnología', 'leadsun' ), 'id' => 'atributos-tecnologia' ) ); ?>
+			<?php get_template_part( 'template-parts/components/entity-text-list', null, array( 'post_id' => $post_id, 'field' => 'technology_applications', 'title' => __( 'Aplicaciones', 'leadsun' ), 'id' => 'aplicaciones-tecnologia' ) ); ?>
 		<?php endif; ?>
 
 		<?php if ( 'leadsun_solution' === $post_type ) : ?>
@@ -58,6 +74,10 @@ $show_content = '' !== $content_text && $content_text !== $excerpt_text;
 
 		<?php if ( in_array( $post_type, array( 'leadsun_solution', 'leadsun_technology', 'leadsun_project' ), true ) ) : ?>
 			<?php get_template_part( 'template-parts/single/entity-relations', null, array( 'post_id' => $post_id ) ); ?>
+		<?php endif; ?>
+
+		<?php if ( $is_technology ) : ?>
+			<?php get_template_part( 'template-parts/components/technology-notes', null, array( 'post_id' => $post_id ) ); ?>
 		<?php endif; ?>
 	</div>
 

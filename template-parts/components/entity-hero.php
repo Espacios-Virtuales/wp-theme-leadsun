@@ -8,6 +8,7 @@
 $title      = $args['title'] ?? '';
 $eyebrow    = $args['eyebrow'] ?? '';
 $excerpt    = $args['excerpt'] ?? '';
+$meta       = is_array( $args['meta'] ?? null ) ? array_filter( array_map( 'sanitize_text_field', $args['meta'] ) ) : array();
 $poster_url = $args['poster_url'] ?? '';
 $compact    = ! empty( $args['compact'] );
 ?>
@@ -17,6 +18,7 @@ $compact    = ! empty( $args['compact'] );
 	<div class="leadsun-container entity-hero__content">
 		<?php if ( $eyebrow ) : ?><p class="leadsun-eyebrow" data-aos="fade-up"><?php echo esc_html( $eyebrow ); ?></p><?php endif; ?>
 		<h1 data-aos="fade-up"><?php echo esc_html( $title ); ?></h1>
+		<?php if ( $meta ) : ?><p class="entity-hero__meta" data-aos="fade-up"><?php echo esc_html( implode( ' · ', $meta ) ); ?></p><?php endif; ?>
 		<?php if ( $excerpt ) : ?><p class="entity-hero__excerpt" data-aos="fade-up"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 	</div>
 </header>
