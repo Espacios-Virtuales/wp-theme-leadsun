@@ -24,6 +24,13 @@ function leadsun_asset_version( string $relative_path ): string {
 
 function leadsun_enqueue_assets(): void {
 	wp_enqueue_style(
+		'leadsun-fonts',
+		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap',
+		array(),
+		null
+	);
+
+	wp_enqueue_style(
 		'leadsun-main',
 		get_template_directory_uri() . '/assets/css/main.css',
 		array(),
@@ -31,9 +38,17 @@ function leadsun_enqueue_assets(): void {
 	);
 
 	wp_enqueue_script(
+		'leadsun-aos',
+		get_template_directory_uri() . '/assets/js/vendor/aos.js',
+		array(),
+		leadsun_asset_version( '/assets/js/vendor/aos.js' ),
+		true
+	);
+
+	wp_enqueue_script(
 		'leadsun-app',
 		get_template_directory_uri() . '/assets/js/app.js',
-		array(),
+		array( 'leadsun-aos' ),
 		leadsun_asset_version( '/assets/js/app.js' ),
 		true
 	);

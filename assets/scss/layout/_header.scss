@@ -13,6 +13,14 @@
   min-height: 5rem;
 }
 
+.leadsun-header .menu a {
+  text-decoration: none;
+}
+
+.leadsun-header .menu a:hover,
+.leadsun-header .menu a:focus-visible {
+  text-decoration: none;
+}
 .site-branding { min-width: 0; }
 
 .leadsun-header__cta { flex: 0 0 auto; min-height: 2.5rem; padding-inline: .85rem; white-space: nowrap; }

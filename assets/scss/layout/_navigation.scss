@@ -4,6 +4,10 @@
   list-style: none;
 }
 
+.main-navigation a {
+  text-decoration: none;
+}
+
 .main-navigation:not(.is-open) {
   display: none;
 }

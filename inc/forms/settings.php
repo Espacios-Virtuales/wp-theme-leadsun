@@ -49,6 +49,33 @@ function leadsun_register_forms_settings(): void {
 			'default'           => 'proyectos@leadsun.cl',
 		)
 	);
+	register_setting(
+		'leadsun_forms',
+		'leadsun_avatar_enabled',
+		array(
+			'type'              => 'boolean',
+			'sanitize_callback' => 'rest_sanitize_boolean',
+			'default'           => false,
+		)
+	);
+	register_setting(
+		'leadsun_forms',
+		'leadsun_avatar_video_url',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'leadsun_sanitize_avatar_video_url',
+			'default'           => '',
+		)
+	);
+	register_setting(
+		'leadsun_forms',
+		'leadsun_avatar_label',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'leadsun_sanitize_avatar_label',
+			'default'           => __( 'Conoce LEADSUN', 'leadsun' ),
+		)
+	);
 }
 add_action( 'admin_init', 'leadsun_register_forms_settings' );
 
@@ -80,11 +107,26 @@ function leadsun_render_forms_settings_page(): void {
 				<tr><th scope="row"><label for="leadsun_forms_cc_recipients"><?php esc_html_e( 'Copias (Cc)', 'leadsun' ); ?></label></th><td><textarea class="large-text" id="leadsun_forms_cc_recipients" name="leadsun_forms_cc_recipients" rows="3"><?php echo esc_textarea( get_option( 'leadsun_forms_cc_recipients', 'proyectos@leadsun.cl' ) ); ?></textarea><p class="description"><?php esc_html_e( 'Uno o más correos, separados por coma o por línea.', 'leadsun' ); ?></p></td></tr>
 				<tr><th scope="row"><label for="leadsun_whatsapp_number"><?php esc_html_e( 'Número WhatsApp', 'leadsun' ); ?></label></th><td><input class="regular-text" id="leadsun_whatsapp_number" name="leadsun_whatsapp_number" type="tel" value="<?php echo esc_attr( get_option( 'leadsun_whatsapp_number', '' ) ); ?>"><p class="description"><?php esc_html_e( 'Incluye código de país. Se conservarán sólo dígitos.', 'leadsun' ); ?></p></td></tr>
 				<tr><th scope="row"><label for="leadsun_whatsapp_default_message"><?php esc_html_e( 'Mensaje inicial WhatsApp', 'leadsun' ); ?></label></th><td><textarea class="large-text" id="leadsun_whatsapp_default_message" name="leadsun_whatsapp_default_message" rows="3"><?php echo esc_textarea( get_option( 'leadsun_whatsapp_default_message', __( 'Hola, quisiera consultar por un proyecto de iluminación LEADSUN.', 'leadsun' ) ) ); ?></textarea></td></tr>
+				<tr><th scope="row"><?php esc_html_e( 'Video comercial', 'leadsun' ); ?></th><td><input type="hidden" name="leadsun_avatar_enabled" value="0"><label for="leadsun_avatar_enabled"><input id="leadsun_avatar_enabled" name="leadsun_avatar_enabled" type="checkbox" value="1" <?php checked( (bool) get_option( 'leadsun_avatar_enabled', true ) ); ?>> <?php esc_html_e( 'Mostrar el launcher del video comercial', 'leadsun' ); ?></label><p class="description"><?php esc_html_e( 'Se muestra por defecto cuando existe una URL de YouTube válida y puede desactivarse manualmente.', 'leadsun' ); ?></p></td></tr>
+				<tr><th scope="row"><label for="leadsun_avatar_video_url"><?php esc_html_e( 'URL del video', 'leadsun' ); ?></label></th><td><input class="regular-text" id="leadsun_avatar_video_url" name="leadsun_avatar_video_url" type="url" value="<?php echo esc_attr( get_option( 'leadsun_avatar_video_url', '' ) ); ?>" placeholder="https://www.youtube.com/watch?v=xxxxxxxxxxx"><p class="description"><?php esc_html_e( 'Usa una URL segura de YouTube. El video se carga sólo al activar el launcher.', 'leadsun' ); ?></p></td></tr>
+				<tr><th scope="row"><label for="leadsun_avatar_label"><?php esc_html_e( 'Texto del launcher', 'leadsun' ); ?></label></th><td><input class="regular-text" id="leadsun_avatar_label" name="leadsun_avatar_label" type="text" maxlength="60" value="<?php echo esc_attr( get_option( 'leadsun_avatar_label', __( 'Conoce LEADSUN', 'leadsun' ) ) ); ?>"></td></tr>
 			</table>
 			<?php submit_button(); ?>
 		</form>
 	</div>
 	<?php
+}
+
+/** Validate that the commercial video uses a supported secure YouTube URL. */
+function leadsun_sanitize_avatar_video_url( $value ): string {
+	$value = is_scalar( $value ) ? esc_url_raw( trim( (string) $value ), array( 'https' ) ) : '';
+	return leadsun_youtube_video( $value ) ? $value : '';
+}
+
+/** Sanitize the short visible and accessible launcher label. */
+function leadsun_sanitize_avatar_label( $value ): string {
+	$value = is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
+	return '' === $value ? __( 'Conoce LEADSUN', 'leadsun' ) : wp_html_excerpt( $value, 60, '' );
 }
 
 /**

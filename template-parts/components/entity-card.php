@@ -24,7 +24,7 @@ $excerpt   = get_the_excerpt( $post_id );
 $poster    = leadsun_entity_poster_url( $post_id, $config['secondary_field'] ?? '' );
 $classes   = get_post_class( 'entity-card', $post_id );
 ?>
-<article id="post-<?php echo esc_attr( $post_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+<article id="post-<?php echo esc_attr( $post_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-aos="fade-up">
 	<a class="entity-card__link" href="<?php echo esc_url( $permalink ); ?>">
 		<img class="entity-card__media" src="<?php echo esc_url( $poster ); ?>" alt="" loading="lazy">
 		<div class="entity-card__body">

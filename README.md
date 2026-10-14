@@ -14,7 +14,6 @@ Esta base deriva conceptualmente de Underscores (`_s`) y conserva sus principios
 - Bootstrap 5 instalado localmente mediante npm
 - JavaScript nativo
 - ACF Free + Local JSON
-- CPT `leadsun_product`
 - CPT `leadsun_project`
 
 ## Instalación local

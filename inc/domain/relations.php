@@ -40,3 +40,31 @@ function leadsun_project_relations( ?int $project_id = null ): array {
 		'technology' => leadsun_related_post_id( leadsun_field( 'project_technology', $post_id ) ),
 	);
 }
+
+/**
+ * Find published projects that already reference a solution or technology.
+ *
+ * @return int[]
+ */
+function leadsun_entity_project_relations( int $entity_id, string $post_type ): array {
+	$field_name = 'leadsun_solution' === $post_type ? 'project_solution' : ( 'leadsun_technology' === $post_type ? 'project_technology' : '' );
+
+	if ( $entity_id <= 0 || '' === $field_name ) {
+		return array();
+	}
+
+	return get_posts(
+		array(
+			'post_type'      => 'leadsun_project',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+			'meta_query'     => array(
+				array(
+					'key'   => $field_name,
+					'value' => (string) $entity_id,
+				),
+			),
+		)
+	);
+}

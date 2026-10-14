@@ -51,6 +51,7 @@ function leadsun_validate_contact_submission( ?array $request = null ): array {
 function leadsun_validate_quote_submission( ?array $request = null, ?array $files = null ): array {
 	$request = null === $request ? wp_unslash( $_POST ) : $request;
 	$files   = null === $files ? $_FILES : $files;
+	$interest = leadsun_quote_interest_from_submission( $request );
 	$data    = array(
 		'name'             => sanitize_text_field( leadsun_form_request_value( $request, 'quote_name' ) ),
 		'company'          => sanitize_text_field( leadsun_form_request_value( $request, 'quote_company' ) ),
@@ -58,7 +59,10 @@ function leadsun_validate_quote_submission( ?array $request = null, ?array $file
 		'phone'            => sanitize_text_field( leadsun_form_request_value( $request, 'quote_phone' ) ),
 		'location'         => sanitize_text_field( leadsun_form_request_value( $request, 'quote_location' ) ),
 		'project_type'     => sanitize_text_field( leadsun_form_request_value( $request, 'quote_project_type' ) ),
-		'product_interest' => sanitize_text_field( leadsun_form_request_value( $request, 'quote_product_interest' ) ),
+		'product_interest' => 'solution' === $interest['type'] ? (string) $interest['id'] : sanitize_text_field( leadsun_form_request_value( $request, 'quote_product_interest' ) ),
+		'interest_type'    => $interest['type'],
+		'interest_id'      => $interest['id'],
+		'interest_name'    => $interest['name'],
 		'budget'           => sanitize_text_field( leadsun_form_request_value( $request, 'quote_budget' ) ),
 		'quantity'         => sanitize_text_field( leadsun_form_request_value( $request, 'quote_quantity' ) ),
 		'stage'            => sanitize_text_field( leadsun_form_request_value( $request, 'quote_stage' ) ),

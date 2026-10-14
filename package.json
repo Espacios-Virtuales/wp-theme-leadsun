@@ -4,11 +4,12 @@
   "private": true,
   "description": "LEADSUN Chile custom WordPress theme foundation",
   "scripts": {
-    "build": "sass assets/scss/main.scss assets/css/main.css --style=compressed --no-source-map && mkdir -p assets/css/fonts && cp node_modules/bootstrap-icons/font/fonts/* assets/css/fonts/",
-    "build:dev": "sass assets/scss/main.scss assets/css/main.css --style=expanded --source-map && mkdir -p assets/css/fonts && cp node_modules/bootstrap-icons/font/fonts/* assets/css/fonts/",
+    "build": "sass assets/scss/main.scss assets/css/main.css --style=compressed --no-source-map && mkdir -p assets/css/fonts assets/js/vendor && cp node_modules/bootstrap-icons/font/fonts/* assets/css/fonts/ && cp node_modules/aos/dist/aos.js assets/js/vendor/aos.js",
+    "build:dev": "sass assets/scss/main.scss assets/css/main.css --style=expanded --source-map && mkdir -p assets/css/fonts assets/js/vendor && cp node_modules/bootstrap-icons/font/fonts/* assets/css/fonts/ && cp node_modules/aos/dist/aos.js assets/js/vendor/aos.js",
     "watch": "sass --watch assets/scss/main.scss:assets/css/main.css --style=expanded --source-map"
   },
   "dependencies": {
+    "aos": "2.3.4",
     "bootstrap": "5.3.8",
     "bootstrap-icons": "^1.13.1"
   },

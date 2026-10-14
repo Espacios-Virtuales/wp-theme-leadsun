@@ -36,7 +36,70 @@ function leadsun_handle_form_submission(): void {
 		return;
 	}
 
-	if ( ! leadsun_send_form_mail( $form_type, $result['data'] ) ) {
+	$lead_id = 0;
+	if ( 'quote' === $form_type ) {
+		$lead_id = leadsun_persist_quote_lead( $result['data'] );
+		if ( is_wp_error( $lead_id ) || ! $lead_id ) {
+			$GLOBALS['leadsun_form_delivery_states'][ $form_type ] = $result;
+			$GLOBALS['leadsun_form_delivery_errors'][ $form_type ] = __( 'No fue posible guardar la solicitud en este momento. Inténtalo nuevamente o utiliza nuestros canales de contacto.', 'leadsun' );
+			return;
+		}
+		$result['data']['lead_id'] = $lead_id;
+	}
+
+	$mail_sent = leadsun_send_form_mail( $form_type, $result['data'] );
+	if ( $lead_id ) {
+		leadsun_update_quote_lead_mail_status( $lead_id, $mail_sent );
+	}
+
+	if ( 'quote' === $form_type && $lead_id ) {
+		$number = leadsun_whatsapp_number();
+		if ( '' !== $number ) {
+			$interest = leadsun_quote_interest_from_entity(
+				sanitize_key( (string) ( $result['data']['interest_type'] ?? '' ) ),
+				(string) absint( $result['data']['interest_id'] ?? 0 )
+			);
+			$default_message = trim(
+				(string) get_option(
+					'leadsun_whatsapp_default_message',
+					__( 'Hola, quisiera consultar por un proyecto de iluminación LEADSUN.', 'leadsun' )
+				)
+			);
+			$lines = array(
+				'' !== $default_message ? $default_message : __( 'Hola, envié una solicitud de cotización LEADSUN.', 'leadsun' ),
+				'Lead: #' . $lead_id,
+				'Nombre: ' . (string) $result['data']['name'],
+			);
+
+			if ( '' !== (string) ( $result['data']['company'] ?? '' ) ) {
+				$lines[] = 'Empresa: ' . (string) $result['data']['company'];
+			}
+			if ( '' !== $interest['name'] ) {
+				$lines[] = 'Interés: ' . $interest['name'];
+				$lines[] = 'Tipo: ' . ( 'solution' === $interest['type'] ? 'Solución' : 'Tecnología' );
+			}
+
+			$whatsapp_url = leadsun_whatsapp_url( implode( ' | ', $lines ) );
+			$parts        = wp_parse_url( $whatsapp_url );
+			$query        = array();
+			if ( is_array( $parts ) && isset( $parts['query'] ) ) {
+				wp_parse_str( $parts['query'], $query );
+			}
+
+			if (
+				is_array( $parts )
+				&& 'https' === ( $parts['scheme'] ?? '' )
+				&& 'wa.me' === ( $parts['host'] ?? '' )
+				&& '/' . $number === ( $parts['path'] ?? '' )
+				&& ! empty( $query['text'] )
+			) {
+				wp_redirect( esc_url_raw( $whatsapp_url ), 303, 'LEADSUN' ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- Explicitly validated wa.me URL from the existing helper.
+				exit;
+			}
+		}
+	}
+
+	if ( ! $mail_sent ) {
 		$GLOBALS['leadsun_form_delivery_states'][ $form_type ] = $result;
 		$GLOBALS['leadsun_form_delivery_errors'][ $form_type ] = __( 'No fue posible enviar la solicitud en este momento. Inténtalo nuevamente o utiliza nuestros canales de contacto.', 'leadsun' );
 		return;

@@ -96,6 +96,78 @@ function leadsun_quote_product_options(): array {
 }
 
 /**
+ * Return an empty contextual commercial interest contract.
+ *
+ * @return array{type: string, id: int, name: string}
+ */
+function leadsun_quote_empty_interest(): array {
+	return array(
+		'type' => '',
+		'id'   => 0,
+		'name' => '',
+	);
+}
+
+/**
+ * Resolve a published commercial entity by its expected internal type.
+ *
+ * @return array{type: string, id: int, name: string}
+ */
+function leadsun_quote_interest_from_entity( string $type, string $raw_id ): array {
+	$empty       = leadsun_quote_empty_interest();
+	$entity_types = array(
+		'solution'   => 'leadsun_solution',
+		'technology' => 'leadsun_technology',
+	);
+
+	if ( ! isset( $entity_types[ $type ] ) || ! preg_match( '/^[1-9][0-9]*$/D', $raw_id ) ) {
+		return $empty;
+	}
+
+	$post = get_post( absint( $raw_id ) );
+	if ( ! $post instanceof WP_Post || $entity_types[ $type ] !== $post->post_type || 'publish' !== $post->post_status ) {
+		return $empty;
+	}
+
+	return array(
+		'type' => $type,
+		'id'   => (int) $post->ID,
+		'name' => get_the_title( $post ),
+	);
+}
+
+/**
+ * Resolve the only accepted GET context. Conflicting query parameters are ignored.
+ *
+ * @return array{type: string, id: int, name: string}
+ */
+function leadsun_quote_interest_from_query( array $query ): array {
+	$has_solution   = array_key_exists( 'solucion', $query );
+	$has_technology = array_key_exists( 'tecnologia', $query );
+
+	if ( $has_solution === $has_technology ) {
+		return leadsun_quote_empty_interest();
+	}
+
+	return $has_solution
+		? leadsun_quote_interest_from_entity( 'solution', leadsun_form_request_value( $query, 'solucion' ) )
+		: leadsun_quote_interest_from_entity( 'technology', leadsun_form_request_value( $query, 'tecnologia' ) );
+}
+
+/**
+ * Revalidate the stable contextual-interest fields from a quote POST.
+ *
+ * interest_name is intentionally not read: WordPress supplies the canonical title.
+ *
+ * @return array{type: string, id: int, name: string}
+ */
+function leadsun_quote_interest_from_submission( array $request ): array {
+	$type = sanitize_key( leadsun_form_request_value( $request, 'interest_type' ) );
+
+	return leadsun_quote_interest_from_entity( $type, leadsun_form_request_value( $request, 'interest_id' ) );
+}
+
+/**
  * Return an escaped retained value from a form state.
  */
 function leadsun_form_value( array $state, string $key ): string {

@@ -17,9 +17,57 @@
             "required": 0
         },
         {
+            "key": "field_leadsun_project_application",
+            "label": "Aplicación",
+            "name": "project_application",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_project_quantity",
+            "label": "Cantidad",
+            "name": "project_quantity",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_project_configuration",
+            "label": "Configuración",
+            "name": "project_configuration",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_project_condition",
+            "label": "Condición del proyecto",
+            "name": "project_condition",
+            "type": "text",
+            "required": 0
+        },
+        {
             "key": "field_leadsun_project_secondary_image",
             "label": "Imagen secundaria",
             "name": "project_secondary_image",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_leadsun_project_secondary_image_2",
+            "label": "Imagen secundaria 2",
+            "name": "project_secondary_image_2",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_leadsun_project_secondary_image_3",
+            "label": "Imagen secundaria 3",
+            "name": "project_secondary_image_3",
             "type": "image",
             "required": 0,
             "return_format": "id",
