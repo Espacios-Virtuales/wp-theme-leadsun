@@ -19,6 +19,7 @@ $interest         = ! empty( $state['data']['interest_type'] )
 $interest_labels  = array(
 	'solution'   => __( 'Solución', 'leadsun' ),
 	'technology' => __( 'Tecnología', 'leadsun' ),
+		'project'    => __( 'Proyecto de referencia', 'leadsun' ),
 );
 ?>
 <section id="cotizacion-form" class="leadsun-form-section leadsun-section" aria-labelledby="quote-form-title">

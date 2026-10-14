@@ -101,7 +101,7 @@ function leadsun_render_lead_admin_column( string $column, int $post_id ): void 
 	} elseif ( 'lead_interest' === $column ) {
 		$type = get_post_meta( $post_id, 'interest_type', true );
 		$name = get_post_meta( $post_id, 'interest_name', true );
-		$label = 'solution' === $type ? __( 'Solución', 'leadsun' ) : ( 'technology' === $type ? __( 'Tecnología', 'leadsun' ) : '' );
+		$label = 'solution' === $type ? __( 'Solución', 'leadsun' ) : ( 'technology' === $type ? __( 'Tecnología', 'leadsun' ) : ( 'project' === $type ? __( 'Proyecto de referencia', 'leadsun' ) : '' ) );
 		echo esc_html( $label && $name ? $label . ': ' . $name : '—' );
 	} elseif ( 'lead_mail_status' === $column ) {
 		echo esc_html( get_post_meta( $post_id, 'mail_status', true ) ?: 'pending' );
