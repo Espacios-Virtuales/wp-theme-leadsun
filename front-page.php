@@ -27,6 +27,7 @@ $contact_channels = leadsun_contact_channels();
 $contact_url     = 'mailto:ventas@leadsun.cl';
 $certifications  = array();
 $whatsapp_url    = leadsun_whatsapp_url();
+$phone_url       = leadsun_contact_phone_url();
 $contact_icons   = array(
 	'whatsapp' => 'bi-whatsapp',
 	'email'    => 'bi-envelope',
@@ -134,6 +135,8 @@ for ( $position = 1; $position <= 5; $position++ ) {
 							<strong><?php echo esc_html( $label ); ?></strong>
 							<?php if ( 'whatsapp' === $key && $whatsapp_url ) : ?>
 								<small><a href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $contact_channels[ $key ] ); ?></a></small>
+							<?php elseif ( 'phone' === $key && $phone_url && ! empty( $contact_channels[ $key ] ) ) : ?>
+								<a href="<?php echo esc_url( $phone_url ); ?>"><?php echo esc_html( $contact_channels[ $key ] ); ?></a>
 							<?php elseif ( ! empty( $contact_channels[ $key ] ) ) : ?>
 								<small><?php echo esc_html( $contact_channels[ $key ] ); ?></small>
 							<?php endif; ?>

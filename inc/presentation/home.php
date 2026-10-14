@@ -140,7 +140,7 @@ function leadsun_contact_channels(): array {
 	$channels = array(
 		'whatsapp' => leadsun_whatsapp_number(),
 		'email'    => sanitize_email( get_option( 'admin_email' ) ),
-		'phone'    => '',
+		'phone'    => leadsun_contact_phone_display(),
 	);
 
 	return apply_filters( 'leadsun_contact_channels', $channels );
