@@ -43,7 +43,21 @@
   }
 
   .main-navigation > div > ul,
-  .main-navigation > ul { padding-inline-start: 1rem; }
+  .main-navigation > ul {
+    display: grid;
+    justify-items: center;
+    gap: .5rem;
+    padding-inline-start: 0;
+    text-align: center;
+  }
+
+  .main-navigation .menu-item { width: 100%; }
+  .main-navigation .sub-menu {
+    width: min(100%, 20rem);
+    justify-items: center;
+    padding-inline: .75rem;
+    margin: .25rem auto 0;
+  }
 }
 
 @media (min-width: 992px) {

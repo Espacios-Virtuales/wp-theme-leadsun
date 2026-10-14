@@ -18,7 +18,10 @@
 .entity-hero--compact .entity-hero__content { padding-block: clamp(1.5rem, 2.5vw, 2.125rem); }
 
 @media (max-width: 575.98px) {
-  .entity-hero__content { padding-block: 1.625rem; }
+  .entity-hero__content { padding-block: 1.625rem; text-align: center; }
   .entity-hero--compact .entity-hero__content { padding-block: 1.375rem; }
   .entity-hero__overlay { background: linear-gradient(0deg, rgba(5, 6, 7, .95), rgba(5, 6, 7, .52)); }
+  .entity-hero__content h1,
+  .entity-hero__meta,
+  .entity-hero__excerpt { margin-right: auto; margin-left: auto; }
 }

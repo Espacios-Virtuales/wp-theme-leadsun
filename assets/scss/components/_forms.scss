@@ -48,4 +48,6 @@
   .leadsun-form__grid { grid-template-columns: 1fr; }
   .leadsun-field--full { grid-column: auto; }
   .leadsun-form .btn-leadsun { width: 100%; }
+  .leadsun-form-section__inner > h2,
+  .leadsun-form__whatsapp { text-align: center; }
 }

@@ -97,8 +97,22 @@
 
 @media (max-width: 767.98px) {
   .entity-media-layout { grid-template-columns: minmax(0, 1fr); }
-  .entity-single__cta > .leadsun-container { align-items: stretch; flex-direction: column; }
-  .entity-single__cta .btn-leadsun { width: 100%; }
+  .entity-single__identity-meta,
+  .entity-single__description > h2,
+  .entity-single__excerpt,
+  .entity-single__cta > .leadsun-container,
+  .leadsun-landing__content .entry-content > :is(h1, h2, h3, p),
+  .leadsun-landing__solutions h2 { text-align: center; }
+  .entity-single__excerpt,
+  .leadsun-landing__content .entry-content > p {
+    max-width: 42rem;
+    margin-right: auto;
+    margin-left: auto;
+    line-height: 1.65;
+  }
+  .entity-single__cta > .leadsun-container { align-items: center; flex-direction: column; }
+  .entity-single__cta .btn-leadsun { width: min(100%, 22rem); }
+  .solution-actions { justify-content: center; }
   .solution-highlight { grid-template-columns: 1fr; }
   .solution-highlight__badge { width: 100%; }
 }

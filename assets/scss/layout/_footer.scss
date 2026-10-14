@@ -41,4 +41,11 @@
   .leadsun-footer__inner { grid-template-columns: 1fr; }
   .leadsun-footer__brand,
   .leadsun-footer__segment { min-height: auto; padding: 1.25rem 0; border-left: 0; border-bottom: 1px solid var(--ls-border); }
+  .leadsun-footer__brand,
+  .leadsun-footer__segment,
+  .site-footer__copyright { text-align: center; }
+  .leadsun-footer__brand .custom-logo-link { width: fit-content; margin-inline: auto; }
+  .leadsun-footer__segment ul { justify-items: center; }
+  .social-navigation__list { justify-content: center; }
+  .site-footer__copyright { overflow-wrap: anywhere; }
 }
