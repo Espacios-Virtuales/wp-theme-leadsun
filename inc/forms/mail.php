@@ -68,6 +68,7 @@ function leadsun_form_mail_body( string $form_type, array $data ): string {
 		$product_name = $product instanceof WP_Post && 'leadsun_solution' === $product->post_type && 'publish' === $product->post_status ? get_the_title( $product ) : '';
 		$data['product_interest'] = $product_name;
 	}
+	$lead_id = absint( $data['lead_id'] ?? 0 );
 	$value = static function ( string $key ) use ( $data, $empty ): string {
 		$current = trim( (string) ( $data[ $key ] ?? '' ) );
 		return '' === $current ? $empty : $current;
@@ -90,11 +91,33 @@ function leadsun_form_mail_body( string $form_type, array $data ): string {
 		);
 	}
 
-	return implode(
-		"\n",
-		array(
+	$lines = array(
 			__( 'Nueva solicitud de proyecto desde el sitio LEADSUN', 'leadsun' ),
 			'',
+		);
+
+	if ( $lead_id ) {
+		$lines[] = 'Lead ID: ' . $lead_id;
+	}
+
+	$interest_labels = array(
+		'solution'   => __( 'Solución', 'leadsun' ),
+		'technology' => __( 'Tecnología', 'leadsun' ),
+		'project'    => __( 'Proyecto de referencia', 'leadsun' ),
+	);
+	$interest = leadsun_quote_interest_from_entity(
+		sanitize_key( (string) ( $data['interest_type'] ?? '' ) ),
+		(string) absint( $data['interest_id'] ?? 0 )
+	);
+	if ( isset( $interest_labels[ $interest['type'] ] ) && $interest['id'] && '' !== $interest['name'] ) {
+		$lines[] = 'Interés: ' . $interest_labels[ $interest['type'] ];
+		$lines[] = 'Selección: ' . $interest['name'];
+		$lines[] = 'ID interno: ' . $interest['id'];
+	}
+
+	$lines = array_merge(
+		$lines,
+		array(
 			'Nombre: ' . $value( 'name' ),
 			'Empresa: ' . $value( 'company' ),
 			'Correo: ' . $value( 'email' ),
@@ -111,4 +134,6 @@ function leadsun_form_mail_body( string $form_type, array $data ): string {
 			$value( 'message' ),
 		)
 	);
+
+	return implode( "\n", $lines );
 }

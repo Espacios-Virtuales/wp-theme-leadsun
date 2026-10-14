@@ -13,6 +13,26 @@
             "library": "all"
         },
         {
+            "key": "field_leadsun_technology_secondary_image_2",
+            "label": "Imagen secundaria 2",
+            "name": "technology_secondary_image_2",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_leadsun_technology_secondary_image_3",
+            "label": "Imagen secundaria 3",
+            "name": "technology_secondary_image_3",
+            "type": "image",
+            "required": 0,
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
             "key": "field_leadsun_technology_youtube_url",
             "label": "URL de YouTube",
             "name": "technology_youtube_url",
@@ -28,6 +48,87 @@
             "return_format": "id",
             "library": "all",
             "mime_types": "pdf"
+        },
+        {
+            "key": "field_leadsun_technology_technical_name",
+            "label": "Nombre técnico",
+            "name": "technology_technical_name",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_technology_category_label",
+            "label": "Categoría o familia tecnológica",
+            "name": "technology_category_label",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_technology_principle_title",
+            "label": "Título del principio o funcionamiento",
+            "name": "technology_principle_title",
+            "type": "text",
+            "required": 0
+        },
+        {
+            "key": "field_leadsun_technology_principle_text",
+            "label": "Principio o funcionamiento",
+            "name": "technology_principle_text",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Describe cómo funciona o qué distingue a la tecnología, con información técnica respaldada.",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_technology_features",
+            "label": "Características de la tecnología",
+            "name": "technology_features",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Una característica por línea. Evita parámetros propios de un modelo de luminaria.",
+            "rows": 6,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_technology_specifications",
+            "label": "Atributos técnicos de la tecnología",
+            "name": "technology_specifications",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Un atributo por línea usando Nombre | Valor. También se admite una tabulación entre nombre y valor.",
+            "rows": 8,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_technology_applications",
+            "label": "Aplicaciones",
+            "name": "technology_applications",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Una aplicación o escenario de uso por línea.",
+            "rows": 6,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_technology_compatibility_note",
+            "label": "Nota de integración o compatibilidad",
+            "name": "technology_compatibility_note",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Texto general. Registra únicamente compatibilidades verificadas.",
+            "rows": 4,
+            "new_lines": ""
+        },
+        {
+            "key": "field_leadsun_technology_note",
+            "label": "Nota técnica o criterio de alcance",
+            "name": "technology_note",
+            "type": "textarea",
+            "required": 0,
+            "instructions": "Aclara variabilidad técnica, condiciones o límites sin inventar datos.",
+            "rows": 4,
+            "new_lines": ""
         }
     ],
     "location": [[{"param": "post_type", "operator": "==", "value": "leadsun_technology"}]],
@@ -38,5 +139,5 @@
     "instruction_placement": "label",
     "active": true,
     "show_in_rest": 0,
-    "modified": 1787337600
+    "modified": 1791859200
 }

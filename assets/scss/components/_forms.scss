@@ -1,5 +1,7 @@
 .leadsun-form { display: grid; gap: 1.25rem; }
 .leadsun-field { display: grid; gap: 0.5rem; }
+.leadsun-field--context p { margin: 0; }
+.leadsun-field__label { color: var(--ls-text-muted); font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .leadsun-form-section__inner { max-width: 62rem; }
 .leadsun-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
 .leadsun-field--full { grid-column: 1 / -1; }
@@ -46,4 +48,6 @@
   .leadsun-form__grid { grid-template-columns: 1fr; }
   .leadsun-field--full { grid-column: auto; }
   .leadsun-form .btn-leadsun { width: 100%; }
+  .leadsun-form-section__inner > h2,
+  .leadsun-form__whatsapp { text-align: center; }
 }

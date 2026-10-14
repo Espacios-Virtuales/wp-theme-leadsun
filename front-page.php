@@ -24,13 +24,29 @@ $project_ids     = leadsun_home_featured_entity_ids( 'leadsun_project', 'home_fe
 $contact_title   = leadsun_field( 'home_contact_title', $home_id, __( '¿TIENES UN PROYECTO DE ILUMINACIÓN?', 'leadsun' ) );
 $contact_text    = leadsun_field( 'home_contact_text', $home_id, __( 'Nuestro equipo puede ayudarte a definir la solución adecuada antes de cotizar.', 'leadsun' ) );
 $contact_channels = leadsun_contact_channels();
-$contact_url     = leadsun_quote_page_url();
+$contact_url     = 'mailto:ventas@leadsun.cl';
+$certifications  = array();
 $whatsapp_url    = leadsun_whatsapp_url();
+$phone_url       = leadsun_contact_phone_url();
 $contact_icons   = array(
 	'whatsapp' => 'bi-whatsapp',
 	'email'    => 'bi-envelope',
 	'phone'    => 'bi-telephone',
 );
+
+for ( $position = 1; $position <= 5; $position++ ) {
+	$label = trim( (string) leadsun_field( 'home_certification_' . $position . '_label', $home_id ) );
+	if ( '' === $label ) {
+		continue;
+	}
+
+	$image     = leadsun_field( 'home_certification_' . $position . '_image', $home_id );
+	$image_url = is_numeric( $image ) ? wp_get_attachment_image_url( absint( $image ), 'medium' ) : '';
+	$certifications[] = array(
+		'label'     => $label,
+		'image_url' => $image_url ? $image_url : '',
+	);
+}
 ?>
 <main id="primary" class="site-main">
 	<section class="home-hero">
@@ -42,13 +58,16 @@ $contact_icons   = array(
 		<div class="home-hero__overlay"></div>
 		<div class="leadsun-container home-hero__content">
 			<h1><?php echo wp_kses_post( nl2br( esc_html( $hero_title ) ) ); ?></h1>
-			<p><?php echo esc_html( $hero_text ); ?></p>
-			<a class="btn-leadsun" href="#soluciones"><?php esc_html_e( 'Conoce nuestras soluciones', 'leadsun' ); ?></a>
+			<p><?php echo esc_html( wp_strip_all_tags( $hero_text ) ); ?></p>
+			<div class="home-hero__actions">
+				<a class="btn-leadsun" href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_solution' ) ); ?>"><?php esc_html_e( 'Explorar soluciones', 'leadsun' ); ?></a>
+				<a class="btn-leadsun-outline" href="<?php echo esc_url( leadsun_quote_page_url() ); ?>"><?php esc_html_e( 'Cotizar un proyecto', 'leadsun' ); ?></a>
+			</div>
 		</div>
 	</section>
 
 	<section id="soluciones" class="home-section home-solutions">
-		<div class="leadsun-container"><h2>NUESTRAS SOLUCIONES PROFESIONALES</h2>
+		<div class="leadsun-container"><h2 data-aos="fade-up">NUESTRAS SOLUCIONES PROFESIONALES</h2>
 			<div class="home-solutions__grid">
 				<?php foreach ( $featured_ids as $id ) : leadsun_home_render_card( $id ); endforeach; ?>
 			</div>
@@ -57,40 +76,54 @@ $contact_icons   = array(
 
 	<section class="home-section home-extreme">
 		<div class="leadsun-container home-feature">
-			<div class="home-feature__content"><h2>BLACK DUALFACE<br>DISEÑADA PARA<br>CONDICIONES EXTREMAS</h2>
+			<div class="home-feature__content" data-aos="fade-up"><h2>BLACK DUALFACE<br>DISEÑADA PARA<br>CONDICIONES EXTREMAS</h2>
 			<?php if ( $extreme_id ) : $config = leadsun_entity_config( 'leadsun_solution' ); $poster = leadsun_entity_poster_url( $extreme_id, $config['secondary_field'] ); $video = leadsun_youtube_video( leadsun_field( 'solution_youtube_url', $extreme_id ) ); ?>
 				<p><?php echo esc_html( get_the_excerpt( $extreme_id ) ); ?></p><a class="btn-leadsun-outline" href="<?php echo esc_url( get_permalink( $extreme_id ) ); ?>"><?php esc_html_e( 'Ver solución', 'leadsun' ); ?></a>
 			<?php endif; ?></div>
 			<?php if ( $extreme_id ) : ?>
-				<div class="home-feature__media"><?php if ( $video ) : get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $video, 'poster_url' => $poster, 'title' => __( 'Video de solución', 'leadsun' ) ) ); else : ?><img src="<?php echo esc_url( $poster ); ?>" alt=""><?php endif; ?></div>
+				<div class="home-feature__media" data-aos="fade-left"><?php if ( $video ) : get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $video, 'poster_url' => $poster, 'title' => __( 'Video de solución', 'leadsun' ) ) ); else : ?><img src="<?php echo esc_url( $poster ); ?>" alt=""><?php endif; ?></div>
 			<?php endif; ?>
 		</div>
 	</section>
 
 	<section class="home-section home-entities">
-		<div class="leadsun-container"><div class="home-section__heading"><h2>TECNOLOGÍA LEADSUN</h2><a href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_technology' ) ); ?>"><?php esc_html_e( 'Ver tecnología', 'leadsun' ); ?></a></div>
+		<div class="leadsun-container"><div class="home-section__heading"><h2 data-aos="fade-up">TECNOLOGÍA LEADSUN</h2><a href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_technology' ) ); ?>"><?php esc_html_e( 'Ver tecnología', 'leadsun' ); ?></a></div>
 			<?php if ( $technology_ids ) : ?><div class="entity-grid"><?php foreach ( $technology_ids as $id ) : leadsun_home_render_card( $id ); endforeach; ?></div><?php endif; ?>
 		</div>
 	</section>
 
 	<section class="home-section home-projects">
-		<div class="leadsun-container"><div class="home-section__heading"><h2>PROYECTOS REALES</h2><a class="btn-leadsun-outline" href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_project' ) ); ?>"><?php esc_html_e( 'Ver proyectos', 'leadsun' ); ?></a></div>
+		<div class="leadsun-container"><div class="home-section__heading"><h2 data-aos="fade-up">PROYECTOS REALES</h2><a class="btn-leadsun-outline" href="<?php echo esc_url( get_post_type_archive_link( 'leadsun_project' ) ); ?>"><?php esc_html_e( 'Ver proyectos', 'leadsun' ); ?></a></div>
 			<?php if ( $project_ids ) : ?><div class="entity-grid"><?php foreach ( $project_ids as $id ) : leadsun_home_render_card( $id ); endforeach; ?></div><?php endif; ?>
 		</div>
 	</section>
 
 	<section class="home-section home-responsible">
-		<div class="leadsun-container home-feature home-feature--reverse"><div class="home-feature__content"><h2>ILUMINACIÓN RESPONSABLE</h2>
+		<div class="leadsun-container home-feature home-feature--reverse"><div class="home-feature__content" data-aos="fade-up"><h2>ILUMINACIÓN RESPONSABLE</h2>
 			<?php if ( $responsible_id ) : $config = leadsun_entity_config( 'leadsun_technology' ); $poster = leadsun_entity_poster_url( $responsible_id, $config['secondary_field'] ); $video = leadsun_youtube_video( leadsun_field( 'technology_youtube_url', $responsible_id ) ); ?>
 				<p><?php echo esc_html( get_the_excerpt( $responsible_id ) ); ?></p><a class="btn-leadsun-outline" href="<?php echo esc_url( get_permalink( $responsible_id ) ); ?>"><?php esc_html_e( 'Ver tecnología', 'leadsun' ); ?></a>
 			<?php endif; ?></div>
-			<?php if ( $responsible_id ) : ?><div class="home-feature__media"><?php if ( $video ) : get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $video, 'poster_url' => $poster, 'title' => __( 'Video de tecnología', 'leadsun' ) ) ); else : ?><img src="<?php echo esc_url( $poster ); ?>" alt=""><?php endif; ?></div><?php endif; ?></div>
+			<?php if ( $responsible_id ) : ?><div class="home-feature__media" data-aos="fade-right"><?php if ( $video ) : get_template_part( 'template-parts/components/video-inline', null, array( 'video' => $video, 'poster_url' => $poster, 'title' => __( 'Video de tecnología', 'leadsun' ) ) ); else : ?><img src="<?php echo esc_url( $poster ); ?>" alt=""><?php endif; ?></div><?php endif; ?></div>
 	</section>
 
-	<section id="certificaciones" class="home-section home-certifications"><div class="leadsun-container"><h2>CERTIFICACIONES</h2><p class="home-certifications__note"><?php esc_html_e( 'Referencias temporales de maqueta; pendientes de validación y material del cliente.', 'leadsun' ); ?></p><ul><?php $certification_defaults = array( 'SEC', 'Resistencia al impacto', 'ISO 9001', 'ISO 14001', 'Certificación Europea' ); for ( $position = 1; $position <= 5; $position++ ) : $label = leadsun_field( 'home_certification_' . $position . '_label', $home_id, $certification_defaults[ $position - 1 ] ); $image = leadsun_field( 'home_certification_' . $position . '_image', $home_id ); $image_url = is_numeric( $image ) ? wp_get_attachment_image_url( absint( $image ), 'medium' ) : ''; ?><li><?php if ( $image_url ) : ?><img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $label ); ?>"><?php endif; ?><span><?php echo esc_html( $label ); ?></span></li><?php endfor; ?></ul></div></section>
+	<?php if ( $certifications ) : ?>
+		<section id="certificaciones" class="home-section home-certifications" data-aos="fade-up">
+			<div class="leadsun-container">
+				<h2><?php esc_html_e( 'CERTIFICACIONES', 'leadsun' ); ?></h2>
+				<ul>
+					<?php foreach ( $certifications as $certification ) : ?>
+						<li>
+							<?php if ( $certification['image_url'] ) : ?><img src="<?php echo esc_url( $certification['image_url'] ); ?>" alt=""><?php endif; ?>
+							<span><?php echo esc_html( $certification['label'] ); ?></span>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</section>
+	<?php endif; ?>
 
 	<section id="contacto" class="home-section home-contact">
-		<div class="leadsun-container">
+		<div class="leadsun-container" data-aos="fade-up">
 			<h2><?php echo esc_html( $contact_title ); ?></h2>
 			<p><?php echo esc_html( $contact_text ); ?></p>
 			<?php if ( $contact_url ) : ?><a class="btn-leadsun" href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Evaluar mi proyecto', 'leadsun' ); ?></a><?php endif; ?>
@@ -102,6 +135,8 @@ $contact_icons   = array(
 							<strong><?php echo esc_html( $label ); ?></strong>
 							<?php if ( 'whatsapp' === $key && $whatsapp_url ) : ?>
 								<small><a href="<?php echo esc_url( $whatsapp_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $contact_channels[ $key ] ); ?></a></small>
+							<?php elseif ( 'phone' === $key && $phone_url && ! empty( $contact_channels[ $key ] ) ) : ?>
+								<a href="<?php echo esc_url( $phone_url ); ?>"><?php echo esc_html( $contact_channels[ $key ] ); ?></a>
 							<?php elseif ( ! empty( $contact_channels[ $key ] ) ) : ?>
 								<small><?php echo esc_html( $contact_channels[ $key ] ); ?></small>
 							<?php endif; ?>

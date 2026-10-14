@@ -66,5 +66,25 @@ function leadsun_register_content_types(): void {
 			'supports'     => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
 		)
 	);
+
+	register_post_type(
+		'leadsun_lead',
+		array(
+			'labels' => array(
+				'name'          => __( 'Leads', 'leadsun' ),
+				'singular_name' => __( 'Lead', 'leadsun' ),
+				'edit_item'     => __( 'Ver lead', 'leadsun' ),
+			),
+			'public'             => false,
+			'publicly_queryable' => false,
+			'exclude_from_search' => true,
+			'has_archive'        => false,
+			'rewrite'             => false,
+			'show_in_rest'       => false,
+			'show_ui'             => true,
+			'menu_icon'          => 'dashicons-id-alt',
+			'supports'           => array( 'title' ),
+		)
+	);
 }
 add_action( 'init', 'leadsun_register_content_types' );

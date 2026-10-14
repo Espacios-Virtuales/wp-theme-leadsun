@@ -22,11 +22,11 @@
 				<?php the_custom_logo(); ?>
 			</div>
 
-			<button class="navbar-toggler menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="<?php esc_attr_e( 'Alternar navegación principal', 'leadsun' ); ?>">
+			<button class="navbar-toggler menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="<?php esc_attr_e( 'Abrir navegación principal', 'leadsun' ); ?>" data-label-open="<?php esc_attr_e( 'Abrir navegación principal', 'leadsun' ); ?>" data-label-close="<?php esc_attr_e( 'Cerrar navegación principal', 'leadsun' ); ?>">
 				<span class="navbar-toggler-icon" aria-hidden="true"></span>
 			</button>
 
-			<nav id="site-navigation" class="main-navigation collapse navbar-collapse" aria-label="<?php esc_attr_e( 'Navegación principal', 'leadsun' ); ?>">
+			<nav id="site-navigation" class="main-navigation navbar-collapse" aria-label="<?php esc_attr_e( 'Navegación principal', 'leadsun' ); ?>">
 				<?php
 				wp_nav_menu(
 					array(
